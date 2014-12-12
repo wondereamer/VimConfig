@@ -1,0 +1,339 @@
+snippet if
+	if (${1:true}) {${2}};
+# if ... else
+snippet ife
+	if (${1:true}) {${2}}
+	else{${3}};
+# tertiary conditional
+snippet t
+	${1:/* condition */} ? ${2:a} : ${3:b}
+# switch
+snippet switch
+	switch(${1:expression}) {
+		case '${3:case}':
+			${4:// code}
+			break;
+		${5}
+		default:
+			${2:// code}
+	}
+# case
+snippet case
+	case '${1:case}':
+		${2:// code}
+		break;
+	${3}
+# for (...) {...}
+snippet for
+	for (var ${2:i} = 0; $2 < ${1:Things}.length; $2${3:++}) {
+		${4:$1[$2]}
+	};
+# for (...) {...} (Improved Native For-Loop)
+snippet forr
+	for (var ${2:i} = ${1:Things}.length - 1; $2 >= 0; $2${3:--}) {
+		${4:$1[$2]}
+	};
+snippet foreach
+	for (${1:attr} in ${2:var}}) {
+		${3:console.log($1);}
+	}
+snippet while
+	while (${1:/* condition */}) {
+		${2:/* code */}
+	}
+snippet do
+	do {
+		${2:/* code */}
+	} while (${1:/* condition */});
+snippet gete
+	document.getElementById("${1:id}");
+snippet log
+	console.log("${1:value}");
+# advance  -------------------------------------------------------------------------------
+snippet prof
+	${1:class_name}.prototype.${2:method_name} = function(${3:first_argument}){
+		${4:// body...}
+	};
+#description
+snippet proattr
+	${1:class_name}.prototype.${2:attr_name} = ${3:value};}
+# Function
+snippet fun
+	function ${1:function_name}(${2:argument}) {
+		${4:// body...}
+	}//end of $1${3:}
+# Anonymous Function
+snippet f
+	function(${1}){ 
+		${2:return this;} 
+	}
+# Object Method
+snippet :f
+	${1:method_name}: function(${2:attribute}) {
+		${4}
+	},
+#
+snippet cl
+	function ${1:ClassName}(${2:args}) {
+		${3:code}	
+	}
+	$1.prototype = {
+		constructor: $1,
+		${4:function definition}
+	};
+#
+snippet obj
+	var ${1:obj_name} = {
+		${1:code}
+	};
+	
+
+# jquery -------------------------------------------------------------------------------
+snippet .dia
+	$('#${1:button_id}').click(function(){
+	    //取得对话框页面
+	    var params=$('${2:#form_name}').serialize(); //序列化表单的值
+	    $.ajax({
+		url:'dialog_get.php', //后台处理程序
+		type:'POST',         //数据发送方式
+		//dataType:'json',     //接受数据格式
+		data:params,         //要传递的数据
+		success:function(data){
+		$('#${3:dialog_id}').html(data);
+		},
+		async:false
+	    });
+	    //打开对话框
+	    $("#$3").dialog("open");
+	});
+snippet xmleach
+	$(xml).find(${1:node}).each(function (i) {
+	    var content = $(this).children("content").text();
+	    $('<li></li>').html(content).appendTo($('#m_list'));
+
+	});
+snippet bind
+	$('${1:.selector}').bind( '${2:dialogbeforeclose}', function(event, ui) {
+	    ${3:code...}
+snippet click
+	$('${1:btn}').click(function(){
+	    ${2}
+		    });
+snippet tabfresh
+	var current_index = $("#${1:tabs}").tabs("option","selected");
+	$("#$1").tabs('load',current_index);
+snippet ready
+	$(document).ready(function(){
+	    ${1}
+		    });
+# util  -------------------------------------------------------------------------------
+# setTimeout function
+snippet timeout
+	setTimeout(function() {${3}}${2}, ${1:10};
+# Get Elements
+snippet get
+	getElementsBy${1:TagName}('${2}')${3}
+# jsdoc  -------------------------------------------------------------------------------
+snippet j.br
+	/** ${1:description} */
+snippet j.cl
+	/**
+	 * ${1:description}
+	 * @constructor
+	 * @extends {${1:goog.Disposable}}
+	 */
+snippet j.param
+	* @param {${1:type}} ${2:arg} ${3:description}
+snippet j.return
+	* @return {${1:type}} ${2:arg} ${3:description}
+snippet author
+	@author ${1:username@google.com} (${2:first last})
+snippet j.enum
+	/**
+	 * Enum for tri-state values.
+	 * @enum {${1:number}}
+	*/
+snippet j.attr
+	/**
+	* Maximum number of things per pane.
+	* @type {${1:typenumber}}
+	*/
+snippet j.type
+	/** @type {${1:type}} */ (${2:var}) }
+snippet j.file
+	// Copyright 2009 Google Inc. All Rights Reserved.
+	/**
+	 * @fileoverview Description of file, its uses and information 
+	 * about its dependencies.
+	 * @author user@google.com (Firstname Lastname)
+	 */
+snippet j.fun
+	/**
+	 * ${1:description}
+	 */
+# backbone  -------------------------------------------------------------------------------
+snippet b.app
+	var app = app || {};
+snippet b.tagview
+	app.${1:LibraryView} = Backbone.View.extend({
+		el: '${2:#books}',
+		events: {
+			'click #add':'addBook',
+		},
+		initialize: function( initialBooks ) {
+			this.collection = new app.Library( initialBooks );
+			this.listenTo( this.collection, 'add', this.renderBook );
+			this.render();
+		},
+
+		render: function() { 
+			this.collection.each(function(item) { this.renderBook( item ); }, this );
+		},
+		renderBook: function( item ) {
+			var bookView = new app.BookView({ model: item });
+			this.$el.append( bookView.render().el ); 
+		},
+		addBook: function( e ) {
+			e.preventDefault();
+			var formData = {};
+			$( '#addBook div' ).children( 'input' ).each( function( i, el ) { 
+				if( $( el ).val() != '' ){
+					formData[ el.id ] = $( el ).val();
+				}
+			});
+			this.collection.add( new app.Book( formData ) ); 
+		},
+	});
+snippet b.elview
+	app.${1:BookView} = Backbone.View.extend({
+		tagName: 'div',
+		className: 'bookContainer',
+		template: _.template( $(${2:'#bookTemplate'}).html() ),
+		events: {
+			'click .delete': 'deleteBook'
+		},
+
+		render: function() {
+			this.$el.html( this.template( this.model.toJSON() ));
+			return this; 
+		},
+
+		deleteBook: function() { 
+			this.model.destroy();
+			this.remove();
+		},
+
+	});
+snippet b.collection
+	app.${1:Name} = Backbone.Collection.extend({
+		model: app.${2:ModelName}
+	});
+snippet b.model
+	app.${1:Book} = Backbone.Model.extend({
+		defaults: {
+			${2:coverImage: 'img/placeholder.jpg'}
+		}
+	});
+# angular  -------------------------------------------------------------------------------
+snippet a.app
+	var app = angular.module('app', []);
+snippet a.view
+	app.controller('${1:name}', ['$scope', function($scope) {
+		${2:code}
+	}]);
+snippet a.viewdep
+	app.controller('${1:name}', [$scope, $${2:dependent}, function($scope) {
+		${3:code}
+	}]);
+snippet a.router
+	app.config(function($stateProvider, $urlRouterProvider) {
+		$urlRouterProvider.otherwise('/');
+		$stateProvider
+			.state('${1:name}', {
+				url: '/$1',
+				templateUrl: '${2:path}.html'
+				controller: function($scope${3:, $stateParams}) {
+					 $scope.inboxId = $stateParams.inboxId;
+				 }
+			})
+	});
+snippet a.state
+	.state('${1:name}', {
+		url: '/$1',
+		templateUrl: '${2:path}.html'
+		controller: function($scope${3:, $stateParams}) {
+			 $scope.inboxId = $stateParams.inboxId;
+		 }
+	})
+snippet a.views
+	views: {
+		 '${1:name}': {
+			 template: '<h4>Filter inbox</h4>',
+			 controller: function($scope) {}
+		 },
+		 'child@parent': {
+			 template: '<h4>Filter inbox</h4>',
+			 controller: function($scope) {}
+		 }
+	}
+snippet a.emit
+	"$emit('${1:event}')" 
+snippet a.broadcast
+	"$broadcast('${1:event}')" 
+snippet a.on
+	$scope.$on('${1:event}', function() {
+		${2:code}
+	});
+snippet a.direct
+	${1:app}.directive("${2:directive}", function() {
+		return {
+			restrict:"AE",
+			scope: {
+
+			},
+			template:"${3:templates}",
+			transclude:true,
+			link: function(scope, element, attrs) {
+				element.bind("mouseenter", function(event) {
+					console.log("blabla..");
+				});
+			}
+		} 
+	});
+snippet a.feedback
+	myServiceApp.factory('userListService', ['$http',
+		function($http) {
+			var doRequest = function(username, path) {
+				return $http({
+					method: 'GET',
+					url: 'users.json'
+				});
+			}
+			return {
+				userList: function(username) {
+					return doRequest(username, 'userList');
+				}
+			};
+		}
+	]);
+
+	myServiceApp.controller('ServiceController', ['$scope', '$timeout', 'userListService',
+		function($scope, $timeout, userListService) {
+			var timeout;
+			$scope.$watch('username', function(newUserName) {
+				if (newUserName) {
+					if (timeout) {
+						$timeout.cancel(timeout);
+					}
+					timeout = $timeout(function() {
+						userListService.userList(newUserName)
+							.success(function(data, status) {
+								$scope.users = data;
+							});
+					}, 350);
+				}
+			});
+		}
+	]);
+snippet transclude
+	<div ng-transclude></div>

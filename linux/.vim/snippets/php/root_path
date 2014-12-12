@@ -1,0 +1,1 @@
+define('QISHI_ROOT_PATH', str_replace('include/common.inc.php', '', str_replace('\\', '/', __FILE__)));

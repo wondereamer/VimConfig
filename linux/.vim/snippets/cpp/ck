@@ -1,0 +1,112 @@
+/*
+ * =====================================================================================
+ *
+ *       Filename:  main.cpp
+ *
+ *    Description:  dialog
+ *
+ *        Version:  1.0
+ *        Created:  01/12/2009 05:34:51 PM
+ *       Revision:  none
+ *       Compiler:  gcc
+ *
+ *         Author:  Dingjie.Wang (mn), dingjie.wang@gmail.com
+ *        Company:  D.J Studio
+ *
+ * =====================================================================================
+ */
+
+
+#include	<QApplication>
+#include	<QtGui>
+#define DEBUG
+#include	<QFile>
+#include	<QDateTime>
+#include	"mydialog.h"
+#include	<QByteArray>
+#include	<QDataStream>
+#include	<iostream>
+#ifdef DEBUG
+#include <iostream>
+int i=0;
+#endif
+    int
+main ( int argc, char *argv[] )
+{
+    QApplication app(argc,argv);
+    Mydlg dlg;
+/*     QTextEdit edit1;
+ *     QTextEdit edit2;
+ *     QListWidget list;
+ *     edit1.setText("stir");
+ *     QSplitter splitter(Qt::Horizontal,&dlg);
+ * 
+ * 
+ *     QSplitter splitter2(Qt::Vertical);
+ *     splitter2.addWidget(&edit1);
+ *     splitter2.addWidget(&edit2);
+ * 
+ *     splitter.addWidget(&list);
+ *     splitter.addWidget(&splitter2);
+ * 
+ *     splitter.setLineWidth(30);
+ *     
+ *     splitter.adjustSize();
+ * 
+ */
+QPointF point(3.4,44);
+QVariant v(point);
+QPointF p=v.toPointF();
+{
+     QMessageBox c;c.setText(QString("%1").arg(p.x()));c.exec();
+}
+#ifdef DEBUG
+    std::cout.width(i);
+    std::cout.fill(' ');
+    std::cout<<std::endl<<' ';
+    std::cout.width(0);
+    std::cout<<"#fun_"<<"getData()";
+    i+=4;
+#endif
+
+#ifdef DEBUG
+    std::cout.width(i);
+    std::cout.fill(' ');
+    std::cout<<std::endl<<' ';
+    std::cout.width(0);
+    std::cout<<"#fun_"<<"load()";
+    i+=4;
+#endif
+
+#ifdef DEBUG
+    i-=4;
+#endif
+#ifdef DEBUG
+    std::cout.width(i);
+    std::cout.fill(' ');
+    std::cout<<std::endl<<' ';
+    std::cout.width(0);
+    std::cout<<"#fun_"<<"swapout()";
+    i+=4;
+#endif
+
+#ifdef DEBUG
+    std::cout.width(i);
+    std::cout.fill(' ');
+    std::cout<<std::endl<<' ';
+    std::cout.width(0);
+    std::cout<<"#fun_"<<"getDirty()";
+    i+=4;
+#endif
+
+#ifdef DEBUG
+    i-=4;
+#endif
+
+#ifdef DEBUG
+    i-=4;
+#endif
+
+	dlg.showMaximized();
+     return app.exec();
+}				/* ----------  end of function main  ---------- */

@@ -1,0 +1,385 @@
+# Some useful Unicode entitieso
+# style link, script src
+# Non-Breaking Space
+snippet nbs
+	&nbsp;
+# ←
+snippet left
+	&#x2190;
+# →
+snippet right
+	&#x2192;
+# ↑
+snippet up
+	&#x2191;
+# ↓
+snippet down
+	&#x2193;
+# ↩
+snippet return
+	&#x21A9;
+# ⇤
+snippet backtab
+	&#x21E4;
+# ⇥
+snippet tab
+	&#x21E5;
+# ⇧
+snippet shift
+	&#x21E7;
+# ⌃
+snippet control
+	&#x2303;
+# ⌅
+snippet enter
+	&#x2305;
+# ⌘
+snippet command
+	&#x2318;
+# ⌥
+snippet option
+	&#x2325;
+# ⌦
+snippet delete
+	&#x2326;
+# ⌫
+snippet backspace
+	&#x232B;
+# ⎋
+snippet escape
+	&#x238B;
+# Generic Doctype
+snippet doctype HTML 5
+	<!DOCTYPE html>
+	<html>
+	<head>
+	<meta charset = "UTF-8">
+	<title>${1}</title>
+	</head>
+	${2}
+	<body>
+	${3}	
+	</body>
+	</html>
+snippet doctype XHTML 1.0 Strict
+	<?xml version = "1.0" encoding = "UTF-8" ?>
+	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<html xmlns = "http://www.w3.org/1999/xhtml">
+	<head>
+	<meta http-equiv = "Content-Type" content = "text/html; charset = UTF-8" />
+	<title>${1}</title>
+	</head>
+	${2}
+	<body>
+	${3}	
+	</body>
+	</html>
+snippet doctype XHTML 1.0 Transitional
+	<?xml version = "1.0" encoding = "UTF-8" ?>
+	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	<html xmlns = "http://www.w3.org/1999/xhtml">
+	<head>
+	<meta http-equiv = "Content-Type" content = "text/html; charset = UTF-8" />
+	<title>${1}</title>
+	${2}
+	</head>
+	<body>
+	${3}
+	</body>
+	</html>
+# HTML Doctype 4.01 Strict
+snippet docts
+	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN""
+	"http://www.w3.org/TR/html4/strict.dtd">
+# HTML Doctype 4.01 Transitional
+snippet doct
+	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""
+	"http://www.w3.org/TR/html4/loose.dtd">
+# HTML Doctype 5
+snippet doct5
+	<!DOCTYPE HTML>
+# XHTML Doctype 1.0 Frameset
+snippet docxf
+	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+# XHTML Doctype 1.0 Strict
+snippet docxs
+	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+# XHTML Doctype 1.0 Transitional
+snippet docxt
+	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+# XHTML Doctype 1.1
+snippet docx
+	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+snippet html
+	<html>
+	${1}
+	</html>
+snippet xhtml
+	<html xmlns="http://www.w3.org/1999/xhtml">
+	${1}
+	</html>
+snippet body
+	<body>
+		${1}
+	</body>
+snippet head
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8"`Close()`>
+
+		<title>${1:`substitute(Filename('', 'Page Title'), '^.', '\u&', '')`}</title>
+		${2}
+	</head>
+snippet title
+	<title>${1:`substitute(Filename('', 'Page Title'), '^.', '\u&', '')`}</title>${2}
+snippet script
+	<script type="text/javascript" charset="utf-8">
+		${1}
+	</script>${2}
+snippet scriptsrc
+	<script src="${1}.js" type="text/javascript" charset="utf-8"></script>${2}
+snippet style
+	<style type="text/css" media="${1:screen}">
+		${2}
+	</style>${3}
+snippet base
+	<base href="${1}" target="${2}"`Close()`>
+snippet r
+	<br`Close()[1:]`>
+snippet div
+	<div>${1}</div>
+# Embed QT Movie
+snippet movie
+	<object width="$2" height="$3" classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B"
+	 codebase="http://www.apple.com/qtactivex/qtplugin.cab">
+		<param name="src" value="$1"`Close()`>
+		<param name="controller" value="$4"`Close()`>
+		<param name="autoplay" value="$5"`Close()`>
+		<embed src="${1:movie.mov}"
+			width="${2:320}" height="${3:240}"
+			controller="${4:true}" autoplay="${5:true}"
+			scale="tofit" cache="true"
+			pluginspage="http://www.apple.com/quicktime/download/"
+		`Close()[1:]`>
+	</object>${6}
+snippet fieldset
+	<fieldset id="$1">
+		<legend>${1:name}</legend>
+
+		${3}
+	</fieldset>
+snippet form
+	<form id="$1"  name="${1:Form1}" action="${2:`Filename('$1_submit')`}" method="${3:get}" accept-charset="utf-8">
+		${4}
+
+
+	<p><input type="submit" value="Continue &rarr;"`Close()`/></p>
+	</form>
+snippet h1
+	<h1 id="${1:heading}">${2:$1}</h1>
+snippet input
+	<input type="${1:text/submit/hidden/button}" name="${2:some_name}" value="${3}"`Close()`/>${4}
+snippet label
+	<label >${1:name}<input type="${2:text/submit/hidden/button/checkbox}" name="${3:$1}" value="${4}" id="${5:$1}"`Close()`/></label>
+snippet link
+	<link rel="stylesheet" href="${1:css/common.css}" type="text/css" media="screen" charset="utf-8"`Close()`>
+snippet mailto
+	<a href="mailto:${1:joe@example.com}?subject=${2:feedback}">${3:email me}</a>
+#a
+snippet a
+	<a href="${1:link}">${2}</a>
+snippet meta
+	<meta name="${1:name}" content="${2:content}"`Close()`>${3}
+snippet opt
+	<option value="${1:option}">${2:$1}</option>${3}
+snippet optt
+	<option>${1:option}</option>${2}
+snippet sel
+	<select name="${1:some_name}" id="${2:$1}">
+		<option value="${3:option}">${4:$3}</option>
+	</select>${5}
+snippet table
+	<table border="${1:0}">
+		<tr> 
+		    <td>${2:Header}</td>
+		</tr>
+	</table>${4}
+#tr
+snippet tr
+	<tr>
+	    <td>${1}</td> 
+	</tr>
+#th
+snippet td
+	<td>${1}</td>
+snippet textarea
+	<textarea name="${1:Name}" rows="${2:8}" cols="${3:40}">${4}</textarea>${5}
+#ul
+snippet ul
+	<ul>
+	<li>${1}</li>
+	</ul>
+snippet li
+	<li>${1}</li>
+snippet --
+	<!--${1}-->
+snippet src
+	<script language="javascript" src="./js/${1:name}"></script>
+snippet hr
+	<hr />
+#description
+snippet span
+	<span>${1}</span>
+#description
+snippet br
+	<br />
+snippet img
+	<img src="${1}" border="${2:0}" height="${3}" width="${4}"/>${5}
+snippet spa
+	&nbsp;
+snippet navtop
+	.nav-top { position: relative; padding: .2em; zoom: 1;border:2px solid red;background:none;}
+	.nav-top .ui-tabs-nav { margin: 0; padding: 0; background:white; border:3px solid green;}
+	.nav-top .ui-tabs-panel {  padding: 0em 0em; background:white; border:3px solid blue;}
+	.nav-top .ui-tabs-nav li { float:right;list-style: none; position: relative; top:0px;
+	    margin:  0; border: 0 ;border-left: red solid 1px; padding: 0; white-space: nowrap; background:none;
+	   /* border:red 2px solid*/}
+	.nav-top .ui-tabs-nav li a { float:right; padding: .5em 1em; text-decoration: none; }
+	.nav-top .ui-tabs-nav li.ui-tabs-selected { margin-bottom: 0; padding-bottom: 0px; }
+	.nav-top .ui-tabs-nav li.ui-tabs-selected a, .nav-top .ui-tabs-nav li.ui-state-disabled a, .nav-top .ui-tabs-nav li.ui-state-processing a {
+	    cursor: text; }
+	.nav-top .ui-tabs-nav li a, .ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a { cursor: pointer; }
+	.nav-top .ui-tabs-hide { display: none !important; }
+	.nav-top .ui-tabs-nav li a:focus{ outline:none; }
+	.nav-top .ui-tabs-selected { background:blue;}
+snippet navleft
+	.nav-left { position: relative; padding: .2em; zoom: 1;border:1px solid white;background:none;}
+	.nav-left .ui-tabs-nav { float:left;margin: 0; padding: 0em 0em 0; background:none; border:3px solid green;width:${1:18%};}
+	.nav-left .ui-tabs-panel {float:right; border-width: 0; padding: 0em 0em; background: none; border:1px solid white;width:${2:80%};}
+	.nav-left .ui-tabs-nav li { float:none;list-style: none;  position: relative; top: 0px;
+	    margin: 0px 0 0 0px; border: 0 !important; padding: 0; background:none;
+	    /* border:red 2px solid*/}
+	.nav-left .ui-tabs-nav li a {float:none; padding: .5em 1em; text-decoration: none; }
+	.nav-left .ui-tabs-nav li.ui-tabs-selected { margin-bottom: 0; padding-bottom: 0px; }
+	.nav-left .ui-tabs-nav li.ui-tabs-selected a, .nav-left .ui-tabs-nav li.ui-state-disabled a, .nav-left .ui-tabs-nav li.ui-state-processing a {
+	    cursor: text; }
+	.nav-left .ui-tabs-nav li a, .ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a { cursor: pointer; }
+	.nav-left .ui-tabs-hide { display: none !important; }
+	.nav-left .ui-tabs-nav li a:focus{ outline:none; }
+snippet navright
+	.nav-right { position: relative; padding: .2em; zoom: 1;border:1px solid white;background:none;}
+	.nav-right .ui-tabs-nav { float:right;margin: 0; padding: 0em 0em 0; background:none; border:3px solid green;width:${1:18%};}
+	.nav-right .ui-tabs-panel {float:left; border-width: 0; padding: 0em 0em; background: none; border:1px solid white;width:${2:80%};}
+	.nav-right .ui-tabs-nav li { float:none;list-style: none;  position: relative; top: 0px;
+	    margin: 0px 0 0 0px; border: 0 !important; padding: 0; background:none;
+	    /* border:red 2px solid*/}
+	.nav-right .ui-tabs-nav li a {float:none; padding: .5em 1em; text-decoration: none; }
+	.nav-right .ui-tabs-nav li.ui-tabs-selected { margin-bottom: 0; padding-bottom: 0px; }
+	.nav-right .ui-tabs-nav li.ui-tabs-selected a, .nav-right .ui-tabs-nav li.ui-state-disabled a, .nav-right .ui-tabs-nav li.ui-state-processing a {
+	    cursor: text; }
+	.nav-right .ui-tabs-nav li a, .ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a { cursor: pointer; }
+	.nav-right .ui-tabs-hide { display: none !important; }
+	.nav-right .ui-tabs-nav li a:focus{ outline:none; }
+snippet ajtab
+	$(function() {
+			$( "#personal_member_tabs" ).tabs({
+			    ajaxOptions: {
+			    error: function( xhr, status, index, anchor ) {
+			    $( anchor.hash ).html(
+			    "Couldn't load this tab. We'll try to fix this as soon as possible. " +
+			    "If this wouldn't be a demo." ); },
+			    async:false },
+			    cache:false
+
+			});
+		    });
+#动态，反映了数据库
+snippet check#c
+	{#section name=row loop=$jobs_nature#}
+	<label >{#$jobs_nature[row].categoryname#}<input type="checkbox" name="jobs_nature[]" value="{#$jobs_nature[row].id#}"
+	    {#section name=id loop=$jobs_nature_id#}
+	    {#if $jobs_nature[row].id eq $jobs_nature_id[id]#}
+	     checked="checked" 
+	    {#/if#}
+	    {#/section#}
+	    />&nbsp;</label>
+	{#/section#}
+#动态，反映了数据库
+snippet sec#c
+	{#section name=${1:row} loop=$${2:jobs_category}#}
+	<option value="{#$$2[$1].${3:id}#}" {#if $$2[$1].id eq $${5}#}selected{#/if#}>{#$$2[$1].${4:categoryname}#} </option>
+	{#/section#}
+#非动态但是反映了数据库
+snippet radioc
+	<label>${1:man}<input type="radio" name="${2:sex}" value="${3:1}" {#if $$2_id}==$3} #}checked="checked"{#/if#} /></label>&nbsp;&nbsp;${4}
+#description
+snippet radio
+	<label>${1:man}<input type="radio" name="${2:sex}" value="${3:1}" /></label>&nbsp;&nbsp;${4}
+#注册类表格
+snippet tbreg
+	<form id="${1:forname}" name="$1" action="" method="${2:post}"  onsubmit="${3:resume_education_form_apply();return false;}" >
+	<table border="1" ${4:}>
+	<tr> <td style="${5:text-align:right;}"><span class="attention">*</span>${6}</td> 
+	     <td ><input type="text" name="${7:name}" value="${8}"/></td> 
+	</tr>
+	<tr> <td colspan="2"><input style="float:right;" type="submit" name="submit" value="${9:confirm}"/></td> </tr>
+	</table>
+	</form>
+#description
+snippet trreg
+	<tr> <td style="${1:text-align:right;}"><span class="attention">*</span>${2}</td> 
+	     <td ><input type="text" name="${3:name}" value="${4}"/></td> 
+	</tr>
+	${5}
+#description
+snippet include
+	include([
+	"./js/lib/jquery-1.7.1.min.js",
+	"style.css",
+	["file2-with-callback.js", function(){
+	 /*do something*/ }],
+
+	 ["jquery-and-callback.js", function(){
+	 /*do something*/ }, "jQuery"],
+
+	 ['other/js/script4.js', function(fn){
+	           //Nested dependencies
+		   include('other/js/script4sbestfriend', fn);
+		       }]
+		       ], function(){
+			    alert("all loaded");
+		           //end callback
+			   });
+#django template-------------------------------------------------------------------------
+snippet comm
+	{% comment %}
+	${1:comment}
+	{% endcomment %}
+snippet if
+	{% if ${1:con} %}
+		${2:code}
+	{% endif %}
+snippet ifel
+	{% if ${1:con} %}
+		${2:code}
+	{% else %}
+		${3:code}
+	{% endif %}
+snippet for
+	{% for ${1:var} in ${2:list} %}
+		${3:code}
+	{% endfor %}
+snippet block
+	{% block ${1:name} %}${2:code}{% endblock %}
+snippet ext
+	{% extends ${1:"base.html"} %}
+snippet inc
+	{% include ${1:"base.html"} %}
+#angular template-------------------------------------------------------------------------
+snippet a.view
+	<div ng-controller='${1:mycontroller}'>
+	${2:code}
+	</div>

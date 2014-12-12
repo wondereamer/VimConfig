@@ -1,0 +1,433 @@
+snippet #!
+	#!/usr/bin/python
+
+snippet imp
+	import ${1:module}
+# Module Docstring
+snippet doc
+	"""${1:description} """
+snippet fundoc
+	"""${1:description}
+
+	Args:
+		name (str): description
+	
+	Returns:
+		int. The result
+	Raises:
+	"""
+snippet from
+	from ${1:module} import ${2:name}
+snippet while
+	while ${1:condition}:
+	    ${2:# code...}
+snippet for
+	for ${1:needle} in ${2:haystack}:
+	    ${3:# code...}
+# New Class
+snippet cl
+	class ${1:ClassName}(${2:object}):
+	    """${3:docstring for $1}"""
+	    def __init__(self, ${4:arg}):
+		${5:super($1, self).__init__()}
+		self.$4 = $4
+		${6}
+# New Function
+snippet def
+	def ${1:fname}(${2:`indent('.') ? 'self' : ''`}):
+	    """${3:docstring for $1}""" 
+	    ${4:pass}
+snippet deff
+	def ${1:fname}(${2:`indent('.') ? 'self' : ''`}):
+	    ${3}
+# New Method
+snippet defs
+	def ${1:mname}(self, ${2:arg}):
+	    ${3:pass}
+snippet property
+	self._${1:property} = None
+	def get_$1(self):
+		return self._$1
+	def set_$1(self, value):
+		self._$1 = value
+	$1 = property(get_$1, set_$1)
+# Lambda
+snippet ld
+	${1:var} = lambda ${2:vars} : ${3:action}
+snippet .
+	self.
+snippet try Try/Except
+	try:
+	    ${1:pass}
+	except ${2:Exception}, ${3:e}:
+	    ${4:raise $3}
+snippet try Try/Except/Else
+	try:
+	    ${1:pass}
+	except ${2:Exception}, ${3:e}:
+	    ${4:raise $3}
+	else:
+	    ${5:pass}
+snippet try Try/Except/Finally
+	try:
+	    ${1:pass}
+	except ${2:Exception}, ${3:e}:
+	    ${4:raise $3}
+	finally:
+	    ${5:pass}
+snippet try Try/Except/Else/Finally
+	try:
+	    ${1:pass}
+	except ${2:Exception}, ${3:e}:
+	    ${4:raise $3}
+	else:
+	    ${5:pass}
+	finally:
+	    ${6:pass}
+# if __name__ == '__main__':
+snippet ifmain
+	if __name__ == '__main__':
+		${1:main()}
+# __magic__
+snippet _
+	__${1:init}__${2}
+snippet r.r
+	robjects.r('''
+		  ${1:Rcode}
+	         ''')
+	${2}
+#description
+snippet with
+	with open() as handle
+	    handle.
+#description
+snippet if
+	if ${1:condition}:
+	    ${2:code} 
+#e
+snippet elif
+	elif ${1:condition}:
+	    ${2:code} 
+#doxygen.................................................................
+snippet gdef
+	## @defgroup ${1}
+	 # 
+	 #@{
+	 #
+	${2}
+	## @} 
+snippet gadd
+	## @addtogroup ${1}
+	 # 
+	 #@{
+	${2}
+	## @}
+snippet gin
+	## @ingroup ${1}
+	 # 
+	 #
+	 ${2}
+snippet gname
+	## @name ${1}
+	 # @{
+	${2}
+	## @}
+#description
+snippet todo
+	## @todo ${1:...}
+#....................................................................................
+snippet fore
+	for i,${1:needle} in enumerate(${2:haystack}):
+	    ${3:# code...}
+#
+snippet fors
+	from operator import itemgetter, attrgetter
+	for ${1:needle} in sorted(${2:haystack}, key=attrgetter('${3:attr}')):
+	    ${4:# code...}
+	
+snippet debug
+	import ipdb
+	ipdb.set_trace()
+snippet debug
+	log.debug(format_log(${1:offset}, ${2:True}, ${3:msg}))
+snippet info
+	log.info(format_log(${1:offset}, ${2:True}, ${3:msg}))
+snippet warning
+	log.warning(format_log(${1:offset}, ${2:True}, ${3:msg}))
+snippet error
+	log.error(format_log(${1:offset}, ${2:True}, ${3:msg}))		
+snippet main
+	if __name__ == '__main__':
+	
+snippet forre
+	for i,${1:needle} in reversed(list(enumerate(${2:haystack}))):
+	    ${3:#code...}
+snippet ford
+	for key, value in ${1:haystack}.iteritems():
+		${2:code...}
+snippet fsk
+	for key in sorted(${1:dict}.iterkeys()):
+		${2:code...}
+snippet fsv
+	for key, value in sorted(${1:dict }.iteritems(), key = lambda (k,v): (v,k)):
+	    ${2:print "%s: %s" % (key, value)}
+# assign index to elements of set
+snippet setindex
+		${1:the_dict} = { }
+		$1.setdefault(key, len($1) - 1)
+snippet fileinput
+	import fileinput                         
+	for line in fileinput.input(inplace = False):
+		if fileinput.lineno() == 2:
+snippet matrix
+	np.zeros((${1:row}, ${2:width}), int)
+snippet read
+	file("${1:filename"}).read()
+#string "(1,2,3)" 
+snippet str2tuple
+	tuple(int(v) for v in re.findall("[0-9]+", string))
+snippet lambda
+	${1:fun} = lambda ${2:arguments} : ${3:body}
+snippet switch
+	values = {
+			   value1: dosomestuff1,
+			   value2: dosomestuff2,
+			   ...
+			   valueN: dosomestuffN,
+			 }
+	values.get(var, dodefaultstuff)()
+snippet groupby
+	for k, g in groupby(ylist, keyfunc):
+		groups.append(list(g))
+snippet widget
+	class Widget(AxesWidget):
+		"""
+		A slider representing a floating point range
+
+		"""
+		def __init__(self, ax):
+			""" """
+			#self.connect_event('button_release_event', self._update)
+			pass
+
+		def _update(self, event):
+			"""update the slider position"""
+			#self.update(event.xdata)
+			pass
+
+		def update(self, val):
+			self.ax.figure.canvas.draw()
+
+		def on_changed(self, obj):
+			self.observers[obj.name] = obj
+
+		def disconnect(self, cid):
+			"""remove the observer with connection id *cid*"""
+			try:
+				del self.observers[cid]
+			except KeyError:
+				pass
+
+		def update_observer(self, obname):
+			'''docstring for update_observer''' 
+			for name, obj in self.observers.iteritems():
+				if name == obname and obname == "slider":
+					obj.update(obj.val, self.wdlength)
+						break
+				 
+		def keyrelease(self, event):
+			pass
+# DJango ----------------------------------------------------------------------
+snippet d.signal	
+	${1:signal_name }= Signal(providing_args=[${2:"user", "openid"}])
+snippet d.importsignal
+	from django.dispatch import Signal
+snippet d.send
+	${1:signal_name}.send(sender=${2:self.__class__}, ${3:arguments=value})
+snippet d.connect
+	${1:signal_name}.connect(${2:signal_handler}, sender=${3:SenderClass}, dispatch_uid=${4:'djangobb_post_save'})
+snippet d.receiver
+	@receiver(${1:post_save}, sender=${2:SenderClass})
+snippet d.url
+	url(r'^${1:url}/$', ${2:func}),
+snippet d.urlinc
+	url(r'^${1:url}/', include('${2:module.urls}')),
+snippet d.subject
+	subject = ''.join(subject.splitlines())
+snippet d.mail
+	try:
+		send_mail(subject,
+				  message,
+				  settings.DEFAULT_FROM_EMAIL,
+				  mail_list,
+				  fail_silently = False,
+				  html_message = html_content)
+	except smtplib.SMTPException, e:
+		print e
+snippet d.commit
+	@transaction.commit_on_success
+snippet d.auth
+	@login_required
+snippet d.onetoone
+	${1:var} = models.OneToOneField(${2:settings.AUTH_USER_MODEL},
+									verbose_name='${3:name}',
+									related_name='${4:related_name}')
+snippet d.datetime
+	${1:var} = models.DateTimeField(_('${2:field_name}'), default=timezone.now)
+snippet d.int
+	${1:var} = models.IntegerField(_('${2:field_name}'), blank=True, default=0)
+snippet d.choice
+	${1:var} = models.CharField(_('${2:field_name}'), max_length=15, default=_('${3:field_name}'), choices=${4:value})
+snippet d.char
+	${1:var} = models.CharField(_('${2:field_name}'), max_length=30, blank=True)
+snippet d.text
+	${1:var} = models.TextField(_('${2:field_name}'), blank=True, default='', max_length=${3:settings.SIGNATURE_MAX_LENGTH})
+snippet d.foreignkey
+	${1:var} = models.ForeignKey(${2:model}, related_name='${3:related_name}', verbose_name=_('${4:name}'))
+snippet d.bool
+	${1:var} = models.BooleanField(_('${2:field_name}'), blank=True, default=False)
+snippet d.manytomany
+	${1:var} = models.ManyToManyField(${2:model}, blank=False,
+									  null=True, verbose_name=_('${3:name}'))
+snippet d.extendedimage
+	${1:var} = ExtendedImageField(_('${1:name}'), blank=True, default='',
+									upload_to=${2:subdirectory},
+									width=${3:width},
+									height=${4:height})
+snippet d.get
+	try:
+		profile = Profile.objects.get(user__username = request.user)
+	except Profile.DoesNotExist:
+		print "Apress isn't in the database yet."
+	else:
+		pass
+snippet d.listview
+	class ${1:ClassName}(ListView):
+		#model = ShopProduct
+		# template_name 为class attribution 而非参数。
+		#paginate_by = 3
+		http_method_names = ['get']
+		context_object_name = '${2:objects_list}'
+
+		def get_context_data(self, **kwargs):
+			context =  super(ShopView, self).get_context_data(**kwargs)
+			${3:context['cats'] = ProductCategory.objects.all()}
+			return context
+
+		def get(self, request, *args, **kwargs):
+			return super($1, self).get(request, *args, **kwargs)
+
+		def get_queryset(self):
+			if 'cat_id' in self.kwargs:
+				# 返回特定种类的商品
+				return ProductCategory.objects.get(id=self.kwargs['cat_id']).shop_products.all()
+			else:
+				# 返回所有的商品
+				return  ShopProduct.objects.all()
+snippet d.detailview
+	class ${1:ClassName}(DetailView):
+		# template_name 为class attribution 而非参数。
+		#paginate_by = 3
+		http_method_names = ['get']
+		context_object_name = '${2:object_name}'
+		queryset = ${3:model}.objects.all()
+
+		def get_context_data(self, **kwargs):
+			context =  super(ShopView, self).get_context_data(**kwargs)
+			${4:context['cats'] = ProductCategory.objects.all()}
+			return context
+
+		def get(self, request, *args, **kwargs):
+			return super($1, self).get(request, *args, **kwargs)
+
+		# 通过url的pk参数获取object
+		def get_object(self):
+			object = super($1, self).get_object()
+			# Record the last accessed date
+			object.last_accessed = timezone.now()
+			object.save()
+			# Return the object
+			return 
+#
+snippet d.importeditview
+	from django.views.generic.edit import ${1:FormView}
+# 
+snippet d.formview
+	class ${1:ClassName(FormView)}:
+		template_name = 'contact.html'
+		form_class = ContactForm
+		success_url = '/thanks/'
+
+		def form_valid(self, form):
+			# This method is called when valid form data has been POSTed.
+			# It should return an HttpResponse.
+			form.send_email()
+			return super(ContactView, self).form_valid(form)
+snippet d.createview
+	class ${1:bbCreate}(CreateView):
+		model = Author
+		fields = ['name']
+snippet d.deleteview
+	class ${1:bbDelete}(DeleteView):
+		model = Author
+		success_url = reverse_lazy('author-list')
+snippet d.updateview
+	class ${1:bbUpdate}(CreateView):
+		model = Author
+		fields = ['name']
+		template_name_suffix = '_update_form'
+snippet d.listurl
+		url(r'^${1:objects}/$', ${2:View}.as_view(template_name='${3:html}'), name='${4:name}'),
+snippet d.detailurl
+		url(r'^${1:objects}/(?P<pk>[0-9]+)/$', ${2:View}.as_view(), name = '$1-detail'),
+snippet d.tplview
+		class ${1:IndexView}(TemplateView):
+			# The list of method names that this view will accept.
+			http_method_names = ['get']
+			#def get(self, request, *args, **kwargs):
+				#dt = Category.objects.get(name='最新动态')
+				#product = Category.objects.get(name='产品专区')
+				#huati = Category.objects.get(name='话题讨论').topics
+				#to_return = {
+						#'cats' : [dt, product],
+						#'huati': huati
+						#}
+				#return render(request, 'sites/forum/index.html', to_return)
+			template_name = 'sites/forum/index.html'
+			def get_context_data(self, **kwargs):
+				context = super(IndexView, self).get_context_data(**kwargs)
+				dt = Category.objects.get(name='最新动态')
+				product = Category.objects.get(name='产品专区')
+				huati = Category.objects.get(name='话题讨论').topics
+				context['cats'] = [dt, product]
+				context['huati'] = huati
+# restful api
+snippet d.a.ser
+	class ${1:ClassName}Serializer(serializers.ModelSerializer):
+		class Meta:
+			model = ${1:Model}
+			fields = (${2:'title', 'body'})
+snippet d.a.source
+	# read only, work through model
+	${1:user} = serializers.Field(source='user.username')
+snippet d.a.pre_save
+	def pre_save(self, obj):
+		obj.owner = self.request.user
+snippet d.a.view
+	class ${1:ClassName}(generics.${2:ListAPIView}):
+		queryset = User.objects.all()
+		serializer_class = UserSerializer
+		permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+		#def pre_save(self, obj):
+			#obj.owner = self.request.user
+snippet d.view
+	class LoginView(TemplateView):
+		""" 登录页面 """
+		template_name = 'sites/registration/login.html'
+		http_method_names = ['post', 'get']
+		def post(self, request, *args, **kwargs):
+				return render(request, template_name, {'form': form})
+
+		def get(self, request, *args, **kwargs):
+			form = LoginForm()
+			return render(request, template_name, {'form': form})

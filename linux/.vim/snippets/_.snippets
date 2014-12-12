@@ -1,0 +1,164 @@
+# Global snippets
+
+# (c) holds no legal value ;)
+snippet c)
+	`&enc[:2] == "utf" ? "©" : "(c)"` Copyright `strftime("%Y")` ${1:`g:snips_author`}. All Rights Reserved.${2}
+snippet date
+	`strftime("%Y-%m-%d")`
+#doxygen---------------------------------------------------------------------------------------
+snippet gdef
+	/**@defgroup ${1}
+	 * 
+	 *@{
+	 */
+	${2}
+	/**@} */
+snippet gadd
+	/**@addtogroup ${1}
+	 * 
+	 *@{
+	 */
+	${2}
+	/**@} */
+snippet gin
+	/**@ingroup ${1}
+	 * 
+	 */
+	 ${2}
+snippet gname
+	/**@name ${1}
+	 * @{ */
+	${2}
+	/**@} */
+#description
+snippet todo
+	/// @todo ...
+snippet note
+	/// @note ...
+snippet warn
+	/// @warning ...
+snippet doxygen
+
+	PROJECT_NAME	       =
+	OUTPUT_DIRECTORY       = ./Doc
+	RECURSIVE              = NO
+	INPUT		       =
+	DOXYFILE_ENCODING      = UTF-8
+	OUTPUT_LANGUAGE        = English
+	GENERATE_LATEX	       = NO
+	OPTIMIZE_OUTPUT_JAVA   = YES
+
+	REFERENCED_BY_RELATION = NO 
+
+	REFERENCES_RELATION    = YES
+	SOURCE_BROWSER         = NO
+	INLINE_SOURCES         = NO
+
+
+	CALLER_GRAPH           = YES
+	CALL_GRAPH             = YES
+	HAVE_DOT	       = YES
+
+	EXTRACT_ALL            = YES
+	EXTRACT_PRIVATE        = YES
+	EXTRACT_STATIC         = YES
+	EXTRACT_LOCAL_METHODS  = YES
+
+#---------------------------------------------------------------------------------------
+snippet sec
+	{#section name=${1:row} loop=$${2:table}#}
+	<option value="{#$$2[$1].${3}#}" >{#$$2[$1].${4}#} </option>
+	{#/section#}
+snippet qtpro
+	OBJECTS_DIR = ../bin/tmp
+	MOC_DIR = ../bin/tmp
+	DESTDIR = ../bin
+	CONFIG += warn_off 
+	DEFINES += DEBUG
+	#PRECOMPILED_HEADER 
+	TEMPLATE = app
+	TARGET = 
+	DEPENDPATH += .
+
+	#INCLUDEPATH += /home/wondereamer/local/include /usr/local/include
+	#LIBS += -L/usr/local/lib -lxxx.so
+
+	# Input
+	HEADERS += pdf_document.h \
+		   using.h
+	SOURCES += main.cpp \
+		   pdf_document.cpp
+
+snippet qtcmake
+	find_package(Qt4 COMPONENTS QtCore QtGui REQUIRED )
+	if (QT4_FOUND)
+		message(STATUS "Qt4 found!") 
+	  include(${QT_USE_FILE})
+	  target_link_libraries (${1:exe} ${QT_LIBRARIES})
+	endif (QT4_FOUND)
+snippet cmake
+	CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
+	PROJECT(${1:project_name})
+	add_definitions("-std=gnu++0x -Winline")
+
+	#SET(M_LIBRARY_LIB "${CMAKE_SOURCE_DIR}/build/library")
+	#set(CMAKE_C_COMPILER   "/usr/bin/gcc-4.7")
+	#set( CMAKE_CXX_COMPILER "/usr/bin/g++-4.7")
+	#set(CMAKE_CXX_FLAGS                "-Wall -std=c++11 -Winline")
+	#set(CMAKE_CXX_FLAGS_DEBUG          "-O0 -g")
+	#set(CMAKE_CXX_FLAGS_MINSIZEREL     "-Os -DNDEBUG")
+	#set(CMAKE_CXX_FLAGS_RELEASE        "-O4 -DNDEBUG")
+	#set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "-O2 -g")
+
+	#add_definitions(-DDATADIR="${OPENCOG_LOCATION}/opencog")
+	if(debug_mode)
+		add_definitions(-DDEBUG)
+	endif()
+
+	file(GLOB source
+		"*.h"
+		"*.cpp"
+		)
+	ADD_EXECUTABLE(${2:exe} ${source})
+
+	#INCLUDE_DIRECTORIES(${M_LIBRARY_INCLUDE})
+	#INCLUDE_DIRECTORIES("../jmesh/include")
+	#link_directories("/usr/local/lib")
+
+	TARGET_LINK_LIBRARIES($2
+		/usr/lib/libboost_python-py27.so
+		${Boost_GRAPH_LIBRARY}
+		${PCL_LIBRARIES})
+
+	#message("${PCL_LIBRARIES}")
+	#ADD_SUBDIRECTORY(library)
+	#INSTALL (FILES 
+		#fishgram.py
+		#util.py
+		#DESTINATION "${DATADIR}/python/")
+snippet swig
+	file(GLOB source
+		"*.cpp"
+		"*.cxx" 
+		)
+	FIND_PACKAGE(SWIG REQUIRED)
+	INCLUDE(${SWIG_USE_FILE})
+	FIND_PACKAGE(PythonLibs)
+	INCLUDE_DIRECTORIES(${PYTHON_INCLUDE_PATH})
+	INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
+
+	SET(CMAKE_SWIG_FLAGS "")
+
+	SET_SOURCE_FILES_PROPERTIES(${1:exe}.i PROPERTIES CPLUSPLUS ON)
+	SET_SOURCE_FILES_PROPERTIES($1.i PROPERTIES SWIG_FLAGS "-includeall")
+	SWIG_ADD_MODULE($1 python $1.i ${source})
+snippet wikiblock
+	{{{
+	${1:Block}
+	}}}
+snippet wikiclass
+	{{{class="brush: ${1:Lang}" 
+	${2:Block}
+	}}}
+snippet code
+	`${1:code}`
