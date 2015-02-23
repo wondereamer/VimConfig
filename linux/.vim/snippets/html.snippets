@@ -312,6 +312,16 @@ snippet sec#c
 	{#section name=${1:row} loop=$${2:jobs_category}#}
 	<option value="{#$$2[$1].${3:id}#}" {#if $$2[$1].id eq $${5}#}selected{#/if#}>{#$$2[$1].${4:categoryname}#} </option>
 	{#/section#}
+snippet select
+	<select name="sex" class="form-control user-sex">
+		{% for choice in object.SEX_CHOICE %}
+			{% if object.sex == choice.0 %}
+				<option value="{{ choice.0 }}" selected>{{ choice.1 }}</option>
+			{% else  %}
+				<option value="{{ choice.0 }}">{{ choice.1 }}</option>
+			{% endif %}
+		{% endfor %}
+	</select>
 #非动态但是反映了数据库
 snippet radioc
 	<label>${1:man}<input type="radio" name="${2:sex}" value="${3:1}" {#if $$2_id}==$3} #}checked="checked"{#/if#} /></label>&nbsp;&nbsp;${4}
@@ -335,6 +345,8 @@ snippet trreg
 	</tr>
 	${5}
 #description
+snippet token
+	{% csrf_token %}
 snippet include
 	include([
 	"./js/lib/jquery-1.7.1.min.js",
@@ -378,6 +390,10 @@ snippet ext
 	{% extends ${1:"base.html"} %}
 snippet inc
 	{% include ${1:"base.html"} %}
+snippet edit
+	{% editable ${1:"base.html"} %}{% endeditable %}
+snippet url
+	{% url '${1:djangobb:forum}' ${2:topic.forum.id} %}
 #angular template-------------------------------------------------------------------------
 snippet a.view
 	<div ng-controller='${1:mycontroller}'>

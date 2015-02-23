@@ -401,6 +401,20 @@ snippet d.tplview
 				huati = Category.objects.get(name='话题讨论').topics
 				context['cats'] = [dt, product]
 				context['huati'] = huati
+snippet d.view
+	class LoginView(TemplateView):
+		""" 登录页面 """
+		template_name = 'sites/registration/login.html'
+		http_method_names = ['post', 'get']
+		def post(self, request, *args, **kwargs):
+				return render(request, template_name, {'form': form})
+
+		def get(self, request, *args, **kwargs):
+			form = LoginForm()
+			return render(request, template_name, {'form': form})
+snippet d.csrf
+	from django.views.decorators.csrf import csrf_exempt
+	@csrf_exempt
 # restful api
 snippet d.a.ser
 	class ${1:ClassName}Serializer(serializers.ModelSerializer):
@@ -420,14 +434,3 @@ snippet d.a.view
 		permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 		#def pre_save(self, obj):
 			#obj.owner = self.request.user
-snippet d.view
-	class LoginView(TemplateView):
-		""" 登录页面 """
-		template_name = 'sites/registration/login.html'
-		http_method_names = ['post', 'get']
-		def post(self, request, *args, **kwargs):
-				return render(request, template_name, {'form': form})
-
-		def get(self, request, *args, **kwargs):
-			form = LoginForm()
-			return render(request, template_name, {'form': form})

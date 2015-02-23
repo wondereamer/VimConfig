@@ -102,7 +102,7 @@ map <silent> <leader>t  <Esc>:wall <CR>:TlistUpdate<CR>:!ctags -R --c++-kinds=+p
 map <silent> <leader>tc  <Esc>:wall <CR>:TlistUpdate<CR>:!ctags -R --c-kinds=+p --fields=+iaS*.[c,h] <CR>
 "navigator
 map <silent> <leader>wm <Esc>:WMToggle<cr>:vertical resize 80<CR><C-W>H
-map <silent> <leader>k  <Esc>:FirstExplorerWindow<cr>z20<CR>:vertical resize 40<CR>M
+map <silent> <leader>k  <Esc>:FirstExplorerWindow<cr>z20<CR>:vertical resize 40<CR>zxM
 map <silent> <leader>j  <Esc>:BottomExplorerWindow<cr>z20<CR><C-w>:vertical resize 40<CR>zxM
 map <silent> <leader>h  <C-W>h<CR>zxM
 "quit ,unsaved
