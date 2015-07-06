@@ -1,9 +1,14 @@
 snippet if
-	if (${1:true}) {${2}};
+	if (${1:true}) {
+		${2}
+	};
 # if ... else
 snippet ife
-	if (${1:true}) {${2}}
-	else{${3}};
+	if (${1:true}) {
+		${2}
+	} else{
+		${3}
+	};
 # tertiary conditional
 snippet t
 	${1:/* condition */} ? ${2:a} : ${3:b}
@@ -48,7 +53,7 @@ snippet do
 snippet gete
 	document.getElementById("${1:id}");
 snippet log
-	console.log("${1:value}");
+	console.log(${1:value});
 # advance  -------------------------------------------------------------------------------
 snippet prof
 	${1:class_name}.prototype.${2:method_name} = function(${3:first_argument}){
@@ -60,8 +65,8 @@ snippet proattr
 # Function
 snippet fun
 	function ${1:function_name}(${2:argument}) {
-		${4:// body...}
-	}//end of $1${3:}
+		${3:// body...}
+	}
 # Anonymous Function
 snippet f
 	function(${1}){ 
@@ -74,13 +79,44 @@ snippet :f
 	},
 #
 snippet cl
-	function ${1:ClassName}(${2:args}) {
-		${3:code}	
-	}
-	$1.prototype = {
-		constructor: $1,
-		${4:function definition}
-	};
+	var ${1:className} = (function $1() {
+
+		function $1(${2:args}) {
+			${3:code}	
+		}
+
+		$1.prototype = {
+
+			constructor: $1,
+
+			get data() { return "data"; }
+
+			${4:function}
+
+		};
+
+		return $1;
+	})();
+snippet subcl
+	var ${1:classname} = (function $1() {
+
+		function $1(${2:args}) {
+			${3:parentclass}.call(this, args);    
+		}
+
+		var parent = $3.prototype;
+		extend($1.prototype, $3.prototype, {
+			constructor: $1, 
+
+			hello: function hello() {
+				parent.hello.call(this);
+				${4:function}
+			},
+
+			get data() { return "data"; }
+		})
+		return $1;
+	})();
 #
 snippet obj
 	var ${1:obj_name} = {
@@ -159,7 +195,7 @@ snippet j.attr
 	* @type {${1:typenumber}}
 	*/
 snippet j.type
-	/** @type {${1:type}} */ (${2:var}) }
+	/** @type {${1:type}} */ (${2:var}) 
 snippet j.file
 	// Copyright 2009 Google Inc. All Rights Reserved.
 	/**
@@ -337,3 +373,80 @@ snippet a.feedback
 	]);
 snippet transclude
 	<div ng-transclude></div>
+snippet kref
+	${1:filed}: { type: Types.Relationship, ref: '${2:Target}'},
+snippet kmodel
+	${1:model}.add({
+		${2:code}
+	});
+snippet kfield
+	${1:filed}: { type: ${2:String}, required: true },
+snippet kimg
+	${1:image}: { type: Types.CloudinaryImage }
+snippet krefb
+	${1:Target}.relationship({ path: '${2:refname}', ref: '${3:ForeignClass}', refPath: '${4:foreignfield}'}); })
+snippet kfind
+	${1:name}.model.find(${2:condition}).exec(function (err, ${3:data}) {
+		// body...
+		users.forEach(function (user) {
+			// body...
+			/*console.log(user.email);*/
+		});
+	});
+snippet kfindone
+	${1:name}.model.findOne(${2:condition}).exec(function (err, ${3:data}) {
+		// body...
+	});
+# keystone
+snippet view
+	view.on('init', function(next) {
+		var q = keystone.list('Forum').model.find().populate('category');
+		q.exec(function(err, result) {
+			locals.forumList = result;
+			if (err) {
+				console.log(err);
+			};
+			next(err);
+		});
+	})
+snippet reduce
+	${1:to} = ${1:from}.reduce(function(target, item){ 
+		target.push(item);
+		return target;
+	}, $1)
+snippet findbyid
+	view.on('init', function(next) {
+		var q = ${1:model}.model.findById(${2:id});
+		q.exec(function(err, result) {
+			locals.forumList = result;
+			${3: code}
+			if (err) {
+				console.log(err);
+			};
+			next(err);
+		});
+	});
+snippet find
+	view.on('init', function(next) {
+		var q = ${1:model}.model.find({${2:cond}});
+		q.exec(function(err, result) {
+			locals.forumList = result;
+			${3: code}
+			if (err) {
+				console.log(err);
+			};
+			next(err);
+		});
+	});
+snippet findone
+	view.on('init', function(next) {
+		var q = ${1:model}.model.findOne({${2:cond}});
+		q.exec(function(err, result) {
+			locals.forumList = result;
+			${3: code}
+			if (err) {
+				console.log(err);
+			};
+			next(err);
+		});
+	});

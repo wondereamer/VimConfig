@@ -26,7 +26,7 @@ set history=50	    " keep 50 lines of command line history
 set ruler	" show the cursor position all the time
 set showcmd	" 
 "" set nocompatible
-colorscheme darkblue
+colorscheme anotherdark
 set nocp
 set nobackup
 set autoread
@@ -356,7 +356,7 @@ au FileType php noremap H F$
 ""au FileType tpl :set FileType=html  //useless
 au FileType html,htm noremap L f>
 au FileType html,htm noremap H F>
-au BufNewFile,BufRead *.tpl set filetype=html
+au BufNewFile,BufRead *.swig set filetype=html
 au BufNewFile,BufRead *.html set filetype=html
 au BufNewFile,BufRead *.htm set filetype=html
 au BufNewFile,BufRead *.tpl noremap L f>
@@ -412,45 +412,45 @@ function! ESnippet()
     norm jdd
 endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"riv.vim 
-let proj1 = { 'path': '~/Work',}
- let g:riv_projects = [proj1]
-"NeoBundle Scripts-----------------------------
-if has('vim_starting')
-  if &compatible
-    set nocompatible               " Be iMproved
-  endif
+""riv.vim 
+"let proj1 = { 'path': '~/Work',}
+ "let g:riv_projects = [proj1]
+""NeoBundle Scripts-----------------------------
+"if has('vim_starting')
+  "if &compatible
+    "set nocompatible               " Be iMproved
+  "endif
 
-  " Required:
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
-endif
+  "" Required:
+  "set runtimepath+=~/.vim/bundle/neobundle.vim/
+"endif
 
-" Required:
-call neobundle#begin(expand('~/.vim/bundle'))
+"" Required:
+"call neobundle#begin(expand('~/.vim/bundle'))
 
-" Let NeoBundle manage NeoBundle
-" Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
+"" Let NeoBundle manage NeoBundle
+"" Required:
+"NeoBundleFetch 'Shougo/neobundle.vim'
 
-" Add or remove your Bundles here:
-NeoBundle 'Shougo/neosnippet.vim'
-NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'ctrlpvim/ctrlp.vim'
-NeoBundle 'flazz/vim-colorschemes'
-NeoBundle 'Rykka/InstantRst'
+"" Add or remove your Bundles here:
+"NeoBundle 'Shougo/neosnippet.vim'
+"NeoBundle 'Shougo/neosnippet-snippets'
+"NeoBundle 'tpope/vim-fugitive'
+"NeoBundle 'ctrlpvim/ctrlp.vim'
+"NeoBundle 'flazz/vim-colorschemes'
+"NeoBundle 'Rykka/InstantRst'
 
-" You can specify revision/branch/tag.
-NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
+"" You can specify revision/branch/tag.
+"NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
 
-" Required:
-call neobundle#end()
+"" Required:
+"call neobundle#end()
 
-" Required:
-filetype plugin indent on
+"" Required:
+"filetype plugin indent on
 
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck
-"End NeoBundle Scripts-------------------------
+"" If there are uninstalled bundles found on startup,
+"" this will conveniently prompt you to install them.
+"NeoBundleCheck
+""End NeoBundle Scripts-------------------------
 
