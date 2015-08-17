@@ -6,9 +6,9 @@ syntax enable
 syntax on
 set autoindent
 set shiftwidth=4
- set softtabstop=4
- set tabstop=4
- set expandtab
+set softtabstop=4
+set tabstop=4
+set expandtab
 set number
 set hlsearch
 set incsearch
@@ -32,7 +32,7 @@ set nobackup
 set autoread
 "autowrite when make
 set autowrite
-" å¤åˆ¶ï¼Œç²˜è´´æ—¶çš„æ ¼å¼åˆ‡æ¢å»º" 
+" ¸´ÖÆ£¬Õ³ÌùÊ±µÄ¸ñÊ½ÇĞ»»½¨" 
 set pastetoggle=<F8>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "dictionary
@@ -44,12 +44,12 @@ set dictionary+=~/.mytags/dictionary/en_word.list
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nohlsearch
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"æºæ–‡ä»¶æ˜¯ä»€ä¹ˆç¼–ç ï¼Œç»“æœä»ç„¶æ˜¯ä»€ä¹ˆç¼–ç 
-"è¾“å…¥ç¼–ç  ä¹Ÿå°±æ˜¯å³å°†è¾“å‡ºçš„ç¼–ç æ ¼å¼"
+"Ô´ÎÄ¼şÊÇÊ²Ã´±àÂë£¬½á¹ûÈÔÈ»ÊÇÊ²Ã´±àÂë
+"ÊäÈë±àÂë Ò²¾ÍÊÇ¼´½«Êä³öµÄ±àÂë¸ñÊ½"
 set fencs=utf-8,usc-bom,euc-jp,gb18030,gbk,gb2312,cp936
-set fenc=utf8
-"set fenc=gbk
-"æ˜¾ç¤ºç¼–ç "
+"" set fenc=utf8
+set fenc=gbk
+"ÏÔÊ¾±àÂë"
 "" set encoding=gbk
 "" let &termencoding=&encoding
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -104,7 +104,7 @@ map <silent> <leader>tc  <Esc>:wall <CR>:TlistUpdate<CR>:!ctags -R --c-kinds=+p 
 map <silent> <leader>wm <Esc>:WMToggle<cr>:vertical resize 80<CR><C-W>H
 map <silent> <leader>k  <Esc>:FirstExplorerWindow<cr>z20<CR>:vertical resize 40<CR>zxM
 map <silent> <leader>j  <Esc>:BottomExplorerWindow<cr>z20<CR><C-w>:vertical resize 40<CR>zxM
-map <silent> <leader>h  <C-W>h<CR>zxM
+map <silent> <leader>h  <C-W>h:vertical resize 2000<CR>zxM
 "quit ,unsaved
 map <silent> <leader>q  <Esc>:qa!<cr>
 "format whole file
@@ -229,7 +229,7 @@ autocmd FileType python set omnifunc=pythoncomplete#Complete
 let g:pydiction_location = '~/.mytags/dictionary/pydiction.list' 
 "
 """""""""""""""""""""""""""""""""""""""
-"æ‹¬å·è¡¥å…¨
+"À¨ºÅ²¹È«
 """"""""""""""""""""""""""""""""""""""""'
 "conflict with echofun.vim"
 autocmd FileType html,htm inoremap {{ {{   }}<ESC>hhhi
@@ -239,7 +239,7 @@ autocmd FileType html,htm inoremap {[ {[   ]}<ESC>hhhi
 inoremap ( ()<ESC>i
 inoremap ) <c-r>=ClosePair(')')<CR>
 inoremap { {<CR>}<ESC>O
-"<c-r>=   æ›¿æ¢"
+"<c-r>=   Ìæ»»"
 inoremap ] <c-r>=ClosePair(']')<CR>
 inoremap ${ ${}<ESC>i
 inoremap #{ {#$#}<esc>hi
@@ -354,15 +354,23 @@ au FileType php :set errorformat=%m\ in\ %f\ on\ line\ %l
 au FileType php noremap L f$
 au FileType php noremap H F$
 ""au FileType tpl :set FileType=html  //useless
-au FileType html,htm noremap L f>
-au FileType html,htm noremap H F>
-au BufNewFile,BufRead *.tpl set filetype=html
+au BufNewFile,BufRead *.swig set filetype=html
 au BufNewFile,BufRead *.html set filetype=html
 au BufNewFile,BufRead *.htm set filetype=html
 au BufNewFile,BufRead *.tpl noremap L f>
 au BufNewFile,BufRead *.tpl noremap H F>
 au BufNewFile,BufRead *.tpl let g:m_type='.tpl'
 au BufNewFile,BufRead *.cpp let g:m_type='.cpp'
+au BufNewFile,BufRead *.js let g:m_type='.cpp'
+au FileType html,htm noremap L f>
+au FileType html,htm noremap H F>
+
+au BufNewFile,BufRead *.js set shiftwidth=2
+au BufNewFile,BufRead *.js set softtabstop=2
+au BufNewFile,BufRead *.js set tabstop=2
+au BufNewFile,BufRead *.js set fenc=utf-8
+au FileType html set fenc=utf-8
+
 " Public Setters
 "map <S-F3> :s/\(\(\w\)\(\w\+\)\).*/public function set\u\2\3(\$\1){\r\t\$this->\1 = \$\1;\r}/<CR>
 "autocmd FileType php set keywordprg=/home/wondereamer/.mytags/documents/php_doc
@@ -412,45 +420,45 @@ function! ESnippet()
     norm jdd
 endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"riv.vim 
-let proj1 = { 'path': '~/Work',}
- let g:riv_projects = [proj1]
-"NeoBundle Scripts-----------------------------
-if has('vim_starting')
-  if &compatible
-    set nocompatible               " Be iMproved
-  endif
+""riv.vim 
+"let proj1 = { 'path': '~/Work',}
+ "let g:riv_projects = [proj1]
+""NeoBundle Scripts-----------------------------
+"if has('vim_starting')
+  "if &compatible
+    "set nocompatible               " Be iMproved
+  "endif
 
-  " Required:
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
-endif
+  "" Required:
+  "set runtimepath+=~/.vim/bundle/neobundle.vim/
+"endif
 
-" Required:
-call neobundle#begin(expand('~/.vim/bundle'))
+"" Required:
+"call neobundle#begin(expand('~/.vim/bundle'))
 
-" Let NeoBundle manage NeoBundle
-" Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
+"" Let NeoBundle manage NeoBundle
+"" Required:
+"NeoBundleFetch 'Shougo/neobundle.vim'
 
-" Add or remove your Bundles here:
-NeoBundle 'Shougo/neosnippet.vim'
-NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'ctrlpvim/ctrlp.vim'
-NeoBundle 'flazz/vim-colorschemes'
-NeoBundle 'Rykka/InstantRst'
+"" Add or remove your Bundles here:
+"NeoBundle 'Shougo/neosnippet.vim'
+"NeoBundle 'Shougo/neosnippet-snippets'
+"NeoBundle 'tpope/vim-fugitive'
+"NeoBundle 'ctrlpvim/ctrlp.vim'
+"NeoBundle 'flazz/vim-colorschemes'
+"NeoBundle 'Rykka/InstantRst'
 
-" You can specify revision/branch/tag.
-NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
+"" You can specify revision/branch/tag.
+"NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
 
-" Required:
-call neobundle#end()
+"" Required:
+"call neobundle#end()
 
-" Required:
-filetype plugin indent on
+"" Required:
+"filetype plugin indent on
 
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck
-"End NeoBundle Scripts-------------------------
+"" If there are uninstalled bundles found on startup,
+"" this will conveniently prompt you to install them.
+"NeoBundleCheck
+""End NeoBundle Scripts-------------------------
 
