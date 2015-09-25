@@ -39,7 +39,7 @@ snippet forr
 		${4:$1[$2]}
 	};
 snippet foreach
-	for (${1:attr} in ${2:var}}) {
+	for (${1:attr} in ${2:var}) {
 		${3:console.log($1);}
 	}
 snippet while
@@ -422,12 +422,6 @@ snippet view
 			next(err);
 		});
 	})
-# 数组拼接
-snippet reduce
-	${1:to} = ${1:from}.reduce(function(target, item){ 
-		target.push(item);
-		return target;
-	}, $1)
 snippet findbyid
 	view.on('init', function(next) {
 		var q = ${1:model}.model.findById(${2:id});
@@ -482,7 +476,7 @@ snippet trace
 	logger.trace(${1:message});
 snippet error
 	logger.error(${1:message});
-snippet series
+snippet a.series
 	async.series([
 
 		function(cb) {
@@ -496,3 +490,14 @@ snippet series
 	], function(err){
 		logger.error(err);
 	});
+snippet a.each
+	async.each(${1:array}, function (${2:elem}, cb) {
+		cb();
+	}, function (err) {
+		if(err) {
+			logger.error(err);
+			return;
+		}
+	});
+snippet deepcopy
+	var ${1:d} = JSON.parse(JSON.stringify(${2:s}));
