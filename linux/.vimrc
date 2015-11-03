@@ -16,8 +16,8 @@ set incsearch
 set hidden
 
 set nobackup
-set wrap
 set textwidth=80
+set wrap
 set fo+=t
 set nocompatible
 set nowb
@@ -47,8 +47,8 @@ set nohlsearch
 "源文件是什么编码，结果仍然是什么编码
 "输入编码 也就是即将输出的编码格式"
 set fencs=utf-8,usc-bom,euc-jp,gb18030,gbk,gb2312,cp936
-set fenc=utf8
-"set fenc=gbk
+"set fenc=utf8
+set fenc=utf-8
 "显示编码"
 "" set encoding=gbk
 "" let &termencoding=&encoding
@@ -238,7 +238,7 @@ autocmd FileType html,htm inoremap {% {%   %}<ESC>hhhi
 autocmd FileType html,htm inoremap {[ {[   ]}<ESC>hhhi
 inoremap ( ()<ESC>i
 inoremap ) <c-r>=ClosePair(')')<CR>
-inoremap { {<CR>}<ESC>O
+"inoremap { {<CR>}<ESC>O
 "<c-r>=   替换"
 inoremap ] <c-r>=ClosePair(']')<CR>
 inoremap ${ ${}<ESC>i

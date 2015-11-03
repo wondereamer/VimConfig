@@ -4,8 +4,9 @@
 "		   )
 ".cpp    [class::fun]      [}]
 """""""""""""""""""""""""""""""""""""""'""""
-autocmd FileType c,cpp,h map <F4> :call HbetweenCpp()<cr>
-autocmd FileType c,cpp,h inoremap <F4> <esc>:call HbetweenCpp()<cr>
+"" autocmd FileType c,cpp,h map <F4> :call HbetweenCpp()<cr>
+autocmd FileType c,cpp,h map <C-h> :call HbetweenCpp()<cr>
+autocmd FileType c,cpp,h inoremap <C-h> <esc>:call HbetweenCpp()<cr>
 autocmd FileType cpp,h map <F2> :call F_HbetweenCpp()<cr>zR
 autocmd FileType cpp,h inoremap <F2> <esc>:call F_HbetweenCpp()<cr>zR
 autocmd FileType cpp,h map ,c   :call Comment_Code()<cr>
