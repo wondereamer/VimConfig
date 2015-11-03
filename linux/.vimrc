@@ -6,9 +6,9 @@ syntax enable
 syntax on
 set autoindent
 set shiftwidth=4
- set softtabstop=4
- set tabstop=4
- set expandtab
+set softtabstop=4
+set tabstop=4
+set expandtab
 set number
 set hlsearch
 set incsearch
@@ -47,7 +47,7 @@ set nohlsearch
 "源文件是什么编码，结果仍然是什么编码
 "输入编码 也就是即将输出的编码格式"
 set fencs=utf-8,usc-bom,euc-jp,gb18030,gbk,gb2312,cp936
-"set fenc=utf8
+"" set fenc=utf8
 set fenc=utf-8
 "显示编码"
 "" set encoding=gbk
@@ -104,7 +104,7 @@ map <silent> <leader>tc  <Esc>:wall <CR>:TlistUpdate<CR>:!ctags -R --c-kinds=+p 
 map <silent> <leader>wm <Esc>:WMToggle<cr>:vertical resize 80<CR><C-W>H
 map <silent> <leader>k  <Esc>:FirstExplorerWindow<cr>z20<CR>:vertical resize 40<CR>zxM
 map <silent> <leader>j  <Esc>:BottomExplorerWindow<cr>z20<CR><C-w>:vertical resize 40<CR>zxM
-map <silent> <leader>h  <C-W>h<CR>zxM
+map <silent> <leader>h  <C-W>h:vertical resize 2000<CR>zxM
 "quit ,unsaved
 map <silent> <leader>q  <Esc>:qa!<cr>
 "format whole file
@@ -238,7 +238,7 @@ autocmd FileType html,htm inoremap {% {%   %}<ESC>hhhi
 autocmd FileType html,htm inoremap {[ {[   ]}<ESC>hhhi
 inoremap ( ()<ESC>i
 inoremap ) <c-r>=ClosePair(')')<CR>
-"inoremap { {<CR>}<ESC>O
+inoremap { {<CR>}<ESC>O
 "<c-r>=   替换"
 inoremap ] <c-r>=ClosePair(']')<CR>
 inoremap ${ ${}<ESC>i
@@ -354,8 +354,6 @@ au FileType php :set errorformat=%m\ in\ %f\ on\ line\ %l
 au FileType php noremap L f$
 au FileType php noremap H F$
 ""au FileType tpl :set FileType=html  //useless
-au FileType html,htm noremap L f>
-au FileType html,htm noremap H F>
 au BufNewFile,BufRead *.swig set filetype=html
 au BufNewFile,BufRead *.html set filetype=html
 au BufNewFile,BufRead *.htm set filetype=html
@@ -363,6 +361,16 @@ au BufNewFile,BufRead *.tpl noremap L f>
 au BufNewFile,BufRead *.tpl noremap H F>
 au BufNewFile,BufRead *.tpl let g:m_type='.tpl'
 au BufNewFile,BufRead *.cpp let g:m_type='.cpp'
+au BufNewFile,BufRead *.js let g:m_type='.cpp'
+au FileType html,htm noremap L f>
+au FileType html,htm noremap H F>
+
+au BufNewFile,BufRead *.js set shiftwidth=2
+au BufNewFile,BufRead *.js set softtabstop=2
+au BufNewFile,BufRead *.js set tabstop=2
+au BufNewFile,BufRead *.js set fenc=utf-8
+au FileType html set fenc=utf-8
+
 " Public Setters
 "map <S-F3> :s/\(\(\w\)\(\w\+\)\).*/public function set\u\2\3(\$\1){\r\t\$this->\1 = \$\1;\r}/<CR>
 "autocmd FileType php set keywordprg=/home/wondereamer/.mytags/documents/php_doc

@@ -39,7 +39,7 @@ snippet forr
 		${4:$1[$2]}
 	};
 snippet foreach
-	for (${1:attr} in ${2:var}}) {
+	for (${1:attr} in ${2:var}) {
 		${3:console.log($1);}
 	}
 snippet while
@@ -386,20 +386,33 @@ snippet kimg
 snippet krefb
 	${1:Target}.relationship({ path: '${2:refname}', ref: '${3:ForeignClass}', refPath: '${4:foreignfield}'}); })
 snippet kfind
-	${1:name}.model.find(${2:condition}).exec(function (err, ${3:data}) {
-		// body...
-		users.forEach(function (user) {
-			// body...
-			/*console.log(user.email);*/
-		});
+	var q = ${1:name}.model.find(${2:condition});
+	q.exec(function (err, ${3:data}) {
+		if (err) {
+			logger.debug(err);
+			return;
+		};
 	});
 snippet kfindone
-	${1:name}.model.findOne(${2:condition}).exec(function (err, ${3:data}) {
-		// body...
+	var q = ${1:name}.model.findOne(${2:condition});
+	q.exec(function (err, ${3:data}) {
+		if (err) {
+			logger.debug(err);
+			return;
+		};
+	});
+snippet kfindbyid
+	var q = ${1:model}.model .findById(${2:id});
+	q.exec(function(err, data) {
+		if (err) {
+			logger.debug(err);
+			return;
+		};
+		${3: code}
 	});
 # keystone
 snippet view
-	view.on('init', function(next) {
+	view.on('init', { action: 'get2'}, function(next) {
 		var q = keystone.list('Forum').model.find().populate('category');
 		q.exec(function(err, result) {
 			locals.forumList = result;
@@ -409,44 +422,82 @@ snippet view
 			next(err);
 		});
 	})
-snippet reduce
-	${1:to} = ${1:from}.reduce(function(target, item){ 
-		target.push(item);
-		return target;
-	}, $1)
 snippet findbyid
 	view.on('init', function(next) {
 		var q = ${1:model}.model.findById(${2:id});
-		q.exec(function(err, result) {
-			locals.forumList = result;
-			${3: code}
+		q.exec(function(err, data) {
 			if (err) {
 				console.log(err);
+				next(err);
+				return;
 			};
+			${3: code}
+			locals.forumList = data;
 			next(err);
 		});
 	});
 snippet find
 	view.on('init', function(next) {
 		var q = ${1:model}.model.find({${2:cond}});
-		q.exec(function(err, result) {
-			locals.forumList = result;
-			${3: code}
+		q.exec(function(err, data) {
 			if (err) {
 				console.log(err);
+				next(err);
+				return;
 			};
+			${3: code}
+			locals.forumList = data;
 			next(err);
 		});
 	});
 snippet findone
 	view.on('init', function(next) {
 		var q = ${1:model}.model.findOne({${2:cond}});
-		q.exec(function(err, result) {
-			locals.forumList = result;
-			${3: code}
+		q.exec(function(err, data) {
 			if (err) {
 				console.log(err);
+				next(err);
+				return;
 			};
+			${3: code}
+			locals.forumList = data;
 			next(err);
 		});
 	});
+snippet m
+	logger.debug("********************");
+snippet debug
+	logger.debug(${1:message});
+snippet info
+	logger.info(${1:message});
+snippet warn
+	logger.warn(${1:message});
+snippet trace
+	logger.trace(${1:message});
+snippet error
+	logger.error(${1:message});
+snippet a.series
+	async.series([
+
+		function(cb) {
+			return cb();
+		},
+
+		function(cb) {
+			cb('error');
+		}
+
+	], function(err){
+		logger.error(err);
+	});
+snippet a.each
+	async.each(${1:array}, function (${2:elem}, cb) {
+		cb();
+	}, function (err) {
+		if(err) {
+			logger.error(err);
+			return;
+		}
+	});
+snippet deepcopy
+	var ${1:d} = JSON.parse(JSON.stringify(${2:s}));
