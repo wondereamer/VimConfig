@@ -1,6 +1,11 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_cnt =9
 let g:netrw_dirhist_1='/Users/wdj/Work/Quant/quantdigger/quantdigger/kernel'
 let g:netrw_dirhist_2='/Users/wdj/Work/Quant/quantdigger/quantdigger/kernel/engine'
 let g:netrw_dirhist_3='/Users/wdj/Work/Quant/quantdigger'
 let g:netrw_dirhist_4='/Users/wdj/Work/Quant/quantdigger/quantdigger/kernel/engine'
+let g:netrw_dirhist_5='/Users/wdj/Work/Quant/quantdigger/quantdigger/datasource'
+let g:netrw_dirhist_6='/Users/wdj/temp'
+let g:netrw_dirhist_7='/Users/wdj/Work/Quant/quantdigger/quantdigger'
+let g:netrw_dirhist_8='/Users/wdj/AXMF/opencog/cogutils'
+let g:netrw_dirhist_9='/Users/wdj/AXMF/AXMTests/workdj/chatservice/wav'

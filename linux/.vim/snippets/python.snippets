@@ -36,7 +36,7 @@ snippet cl
 snippet def
 	def ${1:fname}(${2:`indent('.') ? 'self' : ''`}):
 	    """${3:docstring for $1}""" 
-	    ${4:pass}
+	    ${4:return}
 snippet deff
 	def ${1:fname}(${2:`indent('.') ? 'self' : ''`}):
 	    ${3}
@@ -134,7 +134,7 @@ snippet gname
 	## @}
 #description
 snippet todo
-	## @todo ${1:...}
+	## @TODO ${1:...}
 #....................................................................................
 snippet fore
 	for i,${1:needle} in enumerate(${2:haystack}):
@@ -146,13 +146,10 @@ snippet fors
 	    ${4:# code...}
 	
 snippet debug
-	import ipdb
-	ipdb.set_trace()
-snippet debug
 	log.debug(format_log(${1:offset}, ${2:True}, ${3:msg}))
 snippet info
 	log.info(format_log(${1:offset}, ${2:True}, ${3:msg}))
-snippet warning
+snippet warn
 	log.warning(format_log(${1:offset}, ${2:True}, ${3:msg}))
 snippet error
 	log.error(format_log(${1:offset}, ${2:True}, ${3:msg}))		
@@ -434,3 +431,10 @@ snippet d.a.view
 		permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 		#def pre_save(self, obj):
 			#obj.owner = self.request.user
+snippet ivar
+	:ivar ${1:name}: ${2:description}
+	:vartype $1: ${3:type}
+snippet ifun
+	:param float new_price: 当前价格。
+	:return: 保证金。
+	:rtype: float
