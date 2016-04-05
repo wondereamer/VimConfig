@@ -462,3 +462,4 @@ endfunction
 "NeoBundleCheck
 ""End NeoBundle Scripts-------------------------
 
+let tlist_pyrex_settings = 'python;c:classe;m:memder;f:function'
