@@ -1,0 +1,74 @@
+$-------------------------------------------------------------------------
+== preprocessor.include-global ==
+#include    <<CURSOR>>
+$-------------------------------------------------------------------------
+== preprocessor.include-local ==
+#include    "<CURSOR>"
+$-------------------------------------------------------------------------
+== preprocessor.define ==
+#define	<CURSOR>			/*  */
+$-------------------------------------------------------------------------
+== preprocessor.undefine ==
+#undef	<CURSOR>			/*  */
+$-------------------------------------------------------------------------
+== preprocessor.if-else-endif ==
+#if  |?CONDITION:u|
+<CURSOR><SPLIT>
+#else      /* -----  not |CONDITION|  ----- */
+
+#endif     /* -----  not |CONDITION|  ----- */
+$-------------------------------------------------------------------------
+== preprocessor.ifdef-else-endif ==
+#ifdef  |?CONDITION:u|
+<CURSOR><SPLIT>
+#else      /* -----  not |CONDITION|  ----- */
+
+#endif     /* -----  not |CONDITION|  ----- */
+$-------------------------------------------------------------------------
+== preprocessor.ifndef-else-endif ==
+#ifndef  |?CONDITION:u|
+<CURSOR><SPLIT>
+#else      /* -----  not |CONDITION|  ----- */
+
+#endif     /* -----  not |CONDITION|  ----- */
+$-------------------------------------------------------------------------
+== preprocessor.ifndef-def-endif ==
+#ifndef  |?BASENAME:L|_H
+#define  |BASENAME|_H
+<CURSOR><SPLIT>
+#endif   /* ----- #ifndef |BASENAME|_H  ----- */
+$-------------------------------------------------------------------------
+== preprocessor.error ==
+#error	"<CURSOR>"			/*  */
+$-------------------------------------------------------------------------
+== preprocessor.line ==
+#line	<CURSOR>			/*  */
+$-------------------------------------------------------------------------
+== preprocessor.pragma ==
+#pragma	<CURSOR>			/*  */
+$-------------------------------------------------------------------------
+== preprocessor.debug_f ==
+#ifdef DEBUG
+DEBUG_FUN_BEGIN("<CURSOR>")
+#endif
+$-------------------------------------------------------------------------
+== preprocessor.debug_c ==
+#ifdef DEBUG
+DEBUG_FUN_COMMENT(<CURSOR>)
+#endif
+$-------------------------------------------------------------------------
+== preprocessor.debug_a ==
+    assert(<CURSOR>);
+$-------------------------------------------------------------------------
+== preprocessor.debug_i ==
+#ifdef DEBUG
+DEBUG_FUN_END
+#endif
+    return <CURSOR>;
+$-------------------------------------------------------------------------
+== preprocessor.debug_s ==
+#ifdef DEBUG
+#include "mydebug.h"
+#endif
+$-------------------------------------------------------------------------
+

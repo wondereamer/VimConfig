@@ -1,0 +1,229 @@
+snippet #!
+	#!/usr/bin/python
+
+snippet imp
+	import ${1:module}
+# Module Docstring
+snippet docs
+	'''${1:description} '''
+snippet from
+	from ${1:module} import ${2:name}
+snippet while
+	while ${1:condition}:
+	    ${2:# code...}
+snippet for
+	for ${1:needle} in ${2:haystack}:
+	    ${3:# code...}
+# New Class
+snippet cl
+	class ${1:ClassName}(${2:object}):
+	    """${3:docstring for $1}"""
+	    def __init__(self, ${4:arg}):
+		${5:super($1, self).__init__()}
+		self.$4 = $4
+		${6}
+# New Function
+snippet def
+	def ${1:fname}(${2:`indent('.') ? 'self' : ''`}):
+	    '''${3:docstring for $1}''' 
+	    ${4:pass}
+snippet deff
+	def ${1:fname}(${2:`indent('.') ? 'self' : ''`}):
+	    ${3}
+# New Method
+snippet defs
+	def ${1:mname}(self, ${2:arg}):
+	    ${3:pass}
+snippet property
+	self._${1:property} = None
+	def get_$1(self):
+		return self._$1
+	def set_$1(self, value):
+		self._$1 = value
+	$1 = property(get_$1, set_$1)
+# Lambda
+snippet ld
+	${1:var} = lambda ${2:vars} : ${3:action}
+snippet .
+	self.
+snippet try Try/Except
+	try:
+	    ${1:pass}
+	except ${2:Exception}, ${3:e}:
+	    ${4:raise $3}
+snippet try Try/Except/Else
+	try:
+	    ${1:pass}
+	except ${2:Exception}, ${3:e}:
+	    ${4:raise $3}
+	else:
+	    ${5:pass}
+snippet try Try/Except/Finally
+	try:
+	    ${1:pass}
+	except ${2:Exception}, ${3:e}:
+	    ${4:raise $3}
+	finally:
+	    ${5:pass}
+snippet try Try/Except/Else/Finally
+	try:
+	    ${1:pass}
+	except ${2:Exception}, ${3:e}:
+	    ${4:raise $3}
+	else:
+	    ${5:pass}
+	finally:
+	    ${6:pass}
+# if __name__ == '__main__':
+snippet ifmain
+	if __name__ == '__main__':
+		${1:main()}
+# __magic__
+snippet _
+	__${1:init}__${2}
+snippet r.r
+	robjects.r('''
+		  ${1:Rcode}
+	         ''')
+	${2}
+#description
+snippet with
+	with open() as handle
+	    handle.
+#description
+snippet if
+	if ${1:condition}:
+	    ${2:code} 
+#e
+snippet elif
+	elif ${1:condition}:
+	    ${2:code} 
+#doxygen.................................................................
+snippet gdef
+	## @defgroup ${1}
+	 # 
+	 #@{
+	 #
+	${2}
+	## @} 
+snippet gadd
+	## @addtogroup ${1}
+	 # 
+	 #@{
+	${2}
+	## @}
+snippet gin
+	## @ingroup ${1}
+	 # 
+	 #
+	 ${2}
+snippet gname
+	## @name ${1}
+	 # @{
+	${2}
+	## @}
+#description
+snippet todo
+	## @todo ${1:...}
+#....................................................................................
+snippet fore
+	for i,${1:needle} in enumerate(${2:haystack}):
+	    ${3:# code...}
+#
+snippet fors
+	from operator import itemgetter, attrgetter
+	for ${1:needle} in sorted(${2:haystack}, key=attrgetter('${3:attr}')):
+	    ${4:# code...}
+	
+snippet debug
+	import ipdb
+	ipdb.set_trace()
+snippet debug
+	log.debug(format_log(${1:offset}, ${2:True}, ${3:msg}))
+snippet info
+	log.info(format_log(${1:offset}, ${2:True}, ${3:msg}))
+snippet warning
+	log.warning(format_log(${1:offset}, ${2:True}, ${3:msg}))
+snippet error
+	log.error(format_log(${1:offset}, ${2:True}, ${3:msg}))		
+snippet main
+	if __name__ == '__main__':
+	
+snippet forre
+	for i,${1:needle} in reversed(list(enumerate(${2:haystack}))):
+	    ${3:#code...}
+snippet ford
+	for key, value in ${1:haystack}.iteritems():
+		${2:code...}
+snippet fsk
+	for key in sorted(${1:dict}.iterkeys()):
+		${2:code...}
+snippet fsv
+	for key, value in sorted(${1:dict }.iteritems(), key = lambda (k,v): (v,k)):
+	    ${2:print "%s: %s" % (key, value)}
+# assign index to elements of set
+snippet setindex
+		${1:the_dict} = { }
+		$1.setdefault(key, len($1) - 1)
+snippet fileinput
+	import fileinput                         
+	for line in fileinput.input(inplace = False):
+		if fileinput.lineno() == 2:
+snippet matrix
+	np.zeros((${1:row}, ${2:width}), int)
+snippet read
+	file("${1:filename"}).read()
+#string "(1,2,3)" 
+snippet str2tuple
+	tuple(int(v) for v in re.findall("[0-9]+", string))
+snippet lambda
+	${1:fun} = lambda ${2:arguments} : ${3:body}
+snippet switch
+	values = {
+			   value1: dosomestuff1,
+			   value2: dosomestuff2,
+			   ...
+			   valueN: dosomestuffN,
+			 }
+	values.get(var, dodefaultstuff)()
+snippet groupby
+	for k, g in groupby(ylist, keyfunc):
+		groups.append(list(g))
+snippet widget
+	class Widget(AxesWidget):
+		"""
+		A slider representing a floating point range
+
+		"""
+		def __init__(self, ax):
+			""" """
+			#self.connect_event('button_release_event', self._update)
+			pass
+
+		def _update(self, event):
+			"""update the slider position"""
+			#self.update(event.xdata)
+			pass
+
+		def update(self, val):
+			self.ax.figure.canvas.draw()
+
+		def on_changed(self, obj):
+			self.observers[obj.name] = obj
+
+		def disconnect(self, cid):
+			"""remove the observer with connection id *cid*"""
+			try:
+				del self.observers[cid]
+			except KeyError:
+				pass
+
+		def update_observer(self, obname):
+			'''docstring for update_observer''' 
+			for name, obj in self.observers.iteritems():
+				if name == obname and obname == "slider":
+					obj.update(obj.val, self.wdlength)
+						break
+				 
+		def keyrelease(self, event):
+			pass
