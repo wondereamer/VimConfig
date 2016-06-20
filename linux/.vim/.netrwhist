@@ -1,4 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =2
+let g:netrw_dirhist_cnt =6
 let g:netrw_dirhist_1='/Users/wdj/AXMF/yodaqa/data/bing'
 let g:netrw_dirhist_2='/Users/wdj/Work/Quant/quantdigger'
+let g:netrw_dirhist_3='/Users/wdj/AXMF/AXMTests/workdj/asr_develop/webrtc/speaker-recognition/doc/Final-Report'
+let g:netrw_dirhist_4='/Users/wdj/AXMF/AXMTests/workdj/asr_develop/webrtc/speaker-recognition/log/stage/mixture_log'
+let g:netrw_dirhist_5='/Users/wdj/AXMF/AXMTests/workdj/asr_develop/webrtc/speaker-recognition/src/filters'
+let g:netrw_dirhist_6='/Users/wdj/work/VimConfig/linux/.vim/ftplugin/python/pyflakes'

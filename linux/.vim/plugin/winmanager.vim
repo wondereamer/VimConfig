@@ -275,6 +275,7 @@ function! <SID>StartWindowsManager()
 		" set up the correct width
 		exe g:winManagerWidth.'wincmd |'
 	end
+	"-----------abcd" 
 
 	" now we are on one of the explorers. time to redo the original layout.
 	let _split = &splitbelow
@@ -354,6 +355,7 @@ function! <SID>StartWindowsManager()
 		" if this is not occupying the entire height of the window, then call
 		" its ReSize() function (if it exists).
 		if exists('*'.name.'_ReSize') && !s:IsOnlyVertical()
+			"wells" 
 			exe 'call '.name.'_ReSize()'
 		end
 		let i = i + 1
