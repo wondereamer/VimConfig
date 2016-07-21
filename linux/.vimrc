@@ -49,7 +49,7 @@ set nohlsearch
 set fencs=utf-8,usc-bom,euc-jp,gb18030,gbk,gb2312,cp936
 "" set fenc=utf8
 "" set fenc=utf-8
-"" set enc=utf-8
+set enc=utf-8
 "显示编码"
 "" set encoding=gbk
 "" let &termencoding=&encoding
