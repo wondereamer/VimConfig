@@ -1,0 +1,6 @@
+    if (query.exec()){
+	return true;
+    }else {
+	std::cerr<<"insert node   in databse failed!"<<std::endl;
+    	return false;
+    }

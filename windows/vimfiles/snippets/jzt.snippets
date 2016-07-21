@@ -1,0 +1,227 @@
+snippet if
+	IF ${1:COND} THEN ${2:CASE}
+snippet ifb
+	IF ${1:COND} THEN BEGIN
+		${2:CASE}
+	END
+snippet ife
+	IF ${1:COND} THEN
+		${2:CASE}
+	ELSE
+		${3:CASE}
+snippet for
+	FOR ${1:I = 0} to ${2:NUM} DO
+		${3:CASE}
+snippet forb
+	FOR ${1:I = 0} to ${2:NUM} DO BEGIN
+		${3:CASE}
+	END
+snippet buy
+	bprc:=if(open>up,open,up);
+snippet sell
+	sprc:=if(open<down,open, down);
+snippet draw
+	//取到开平仓价格,
+	duokc:=ref(holding,1)<=0 and holding>0;
+	kongkc:=ref(holding,1)>=0 and holding<0;
+	duopc:=ref(holding,1)>0 and holding<=0;
+	kongpc:=ref(holding,1)<0 and holding>=0;
+	variable:duokcj=0,kongkcj=0,duopcj=0,kongpcj=0;
+	duokcj:=if(duokc,ENTERPRICE,duokcj);
+	kongkcj:=if(kongkc,ENTERPRICE,kongkcj);
+	duopcj:=if(duopc,EXITPRICE,duopcj);
+	kongpcj:=if(kongpc,EXITPRICE,kongpcj);
+	// 画盈亏线
+	col:=if(duokcj<duopcj, colorred, colorgreen);
+	DRAWLINE(duokc,duokcj,duopc,duopcj,0,col,4);
+	col:=if(kongkcj>kongpcj,colorred,colorgreen);
+	DRAWLINE(kongkc,kongkcj,kongpc,kongpcj,0,col,4);
+snippet duozs
+	if holding>0 then duozs1:duozs;
+snippet kongzs
+	if holding<0 then kongzs1:kongzs;
+snippet day
+	upline:="HYLK.oo#day";
+	downline:="HYLK.oo#day";
+snippet ifbar0
+	if date<>ref(date,1) then
+snippet bar0
+	bar0:=BARSLAST(ref(date,1)<>date );
+
+
+
+snippet template
+	// ${3:说明}
+	// DESIGNED BY ${1:author}
+	// ${2:time2010.07.16}
+	//声明参数
+	INPUT : T20(20,15,60,1) ;
+
+	//声明变量
+	IFDRAW := False
+	NT := 1 ;					//调试信息带时间戳
+	MFILTER := 20;
+	BuyOrderThisBar := 0 ;		//当前BAR有过交易
+	VARIABLE : MyEntryPrice =0 ;		 //开仓价格
+	VARIABLE : MyExitPrice = 0 ;			//平仓价格
+	VARIABLE : Units = 0 ;			//交易单位
+	VARIABLE : Position = 0 ;			//仓位状态: 0表示没有仓位，1表示持有多头， -1表示持有空
+
+	Long := False;            // 多头开仓条件
+	Short := False;          // 开空条件
+
+	LongA := False;          // 多头加仓条件
+	ShortA := False;         // 空头加成条件
+
+	LongX1 := False;		// 多头离市条件
+	ShortX1 := False;     // 空头离市条件
+
+	LongX2 := False;		// 多头止损条件
+	ShortX2 := False;      // 空头止损条件
+
+
+	VARIABLE : T20HI=CLOSE ;			//20周期的高点
+	VARIABLE : T20LO=CLOSE ;			//20周期的低点
+	//准备需要计算的变量
+	T20HI := REF(HHV(H,T20),1) ;
+	T20LO := REF(LLV(L,T20),1) ;
+
+	//开始执行时 初始化数据
+	IF BARPOS=1 THEN BEGIN
+		//Position := 0 ;
+	END //IF
+
+	/// 如果当前是没有持仓的状态
+	IF Position = 0 AND BARPOS > MFILTER AND H>L THEN BEGIN
+		//建立多头进场条件
+		Long := 
+		//多头进场
+		IF Long THEN BEGIN
+			MyEntryPrice := IF(OPEN > ,OPEN , ) ;			
+			MyEntryPrice := CEILING(MyEntryPrice/MINDIFF)*MINDIFF ;	
+			BUY(1=1, num, LIMITR, MyEntryPrice);
+			Position := 1 ;
+			Units := 1 ;
+			BuyOrderThisBar := 1;
+		END 
+
+		//建立空头进场条件
+		Short := 
+		//空头进场
+		IF Short AND Position=0 THEN BEGIN			
+			MyEntryPrice := IF(OPEN <  ,OPEN , ) ;			
+			MyExitPrice := FLOOR(MyExitPrice/MINDIFF)*MINDIFF ;	
+			BUYSHORT(1=1, num, LIMITR, MyEntryPrice);
+			Position := -1 ;
+			Units := 1 ;
+			BuyOrderThisBar := 1;
+		END
+		//如果跳转，程序不会检查同一根K线是否可以加仓
+		GOTO DISPLAY_ ;
+	END  
+
+	/// 如果当前持有多头仓位的状态
+	IF Position=1 AND BARPOS>MFILTER AND H>L THEN BEGIN
+		//多头加仓条件
+		LongA := 
+		WHILE LongA DO BEGIN
+			MyEntryPrice := IF(OPEN> ,OPEN , ) ;
+			MyEntryPrice := CEILING(MyEntryPrice/MINDIFF)*MINDIFF ;	
+			BUY(1=1, num, LIMITR, MyEntryPrice);
+			Units := Units+1 ;
+			BuyOrderThisBar := 1;
+			LongA := FALSE;
+		END //WHILE	
+		
+		//建立多头离场条件
+		LONGX1 := 
+		IF LONGX1 AND BuyOrderThisBar=0 THEN BEGIN
+			MyExitPrice := IF(OPEN< ,OPEN , ) ;			
+			MyExitPrice := FLOOR(MyExitPrice/MINDIFF)*MINDIFF ;	
+			SELL( 1=1, 0, LIMITR,MyExitPrice);
+			Position := 0 ;
+			Units := 0 ;
+		END
+
+		//建立多头止损条件
+		LONGX2 := 
+		//Position 可防止离场后又止损, BuyOrderThisBar防止单根开平
+		IF LONGX2 AND Position=1 AND BuyOrderThisBar=0 THEN BEGIN
+			MyExitPrice := IF(OPEN< ,OPEN , ) ;		
+			//@@ 最小变动价位的整数倍
+			MyExitPrice := FLOOR(MyExitPrice/MINDIFF)*MINDIFF ;	
+			SELL(1=1 ,0,LIMITR,MyExitPrice);
+			Position := 0 ;
+			Units := 0 ;
+		END
+	END  //IF
+
+
+	//如果当前持有空头仓位的状态
+	IF Position = -1 AND BARPOS>MFILTER AND H>L THEN BEGIN
+		ShortA := 
+		//空头加仓条件
+		WHILE ShortA DO BEGIN
+			MyEntryPrice := IF(OPEN< ,OPEN , ) ;			
+			MyEntryPrice := FLOOR(MyEntryPrice/MINDIFF)*MINDIFF ;	
+			BUYSHORT(1=1, num, LIMITR, MyEntryPrice);
+			Units := Units+1 ;
+			BuyOrderThisBar := 1;
+			ShortA:= FALSE;
+		END //IF	
+
+		//建立空头离场条件
+		SHORTX1 := 
+		IF SHORTX1 AND BuyOrderThisBar=0 THEN BEGIN
+			MyExitPrice := IF(OPEN> ,OPEN , ) ;			
+			MyEntryPrice := CEILING(MyEntryPrice/MINDIFF)*MINDIFF ;	
+			SELLSHORT( 1=1,0,LIMITR,MyExitPrice);
+			Position := 0 ;
+			Units := 0 ;
+		END 
+
+		//建立空头止损条件
+		SHORTX2 := 
+		IF SHORTX2 AND Position = -1 AND BuyOrderThisBar=0  THEN BEGIN
+			MyExitPrice := IF(OPEN> ,OPEN , ) ;			
+			MyEntryPrice := CEILING(MyEntryPrice/MINDIFF)*MINDIFF ;	
+			SELLSHORT(1=1,0,LIMITR,MyExitPrice);
+			Position := 0 ;
+			Units := 0 ;
+		END 
+
+	END  //IF
+
+	//----------------------------------------------------------------------------------------------------------
+
+	//IF _DEBUGOUT>0 THEN BEGIN
+		//DEBUGFILE2('C:\DEBUGFILE.TXT','BARPOS=%.0F' ,BARPOS,NT ) ;
+		//DEBUGFILE2('C:\DEBUGFILE.TXT','T20HI=%.2F' ,T20HI ,NT) ;
+		
+	//END 
+
+	//显示账户状态
+	DISPLAY_@ 资产:ASSET, NoDraw;
+	可用现金:CASH(0), NODRAW;
+	POS:HOLDING, NODRAW;
+	交易次数:TOTALDAYTRADE,  NODRAW;
+	当前持仓:HOLDING,COLORGRAY, NODRAW;
+	当前资产:ASSET,NOAXIS,COLORGRAY;
+
+	//取到开平仓价格, 画盈亏线, 单根买卖无法显示，
+	//如果多次加仓，连接第一次加仓的线的最后一次交易价格。
+	variable:duokcj=0,kongkcj=0,duopcj=0,kongpcj=0;
+	duokc:=ref(holding,1)<=0 and holding>0;
+	kongkc:=ref(holding,1)>=0 and holding<0;
+	duopc:=ref(holding,1)>0 and holding<=0;
+	kongpc:=ref(holding,1)<0 and holding>=0;
+	IF IFDRAW THEN BEGIN
+		duokcj:=if(duokc,ENTERPRICE,duokcj);
+		duopcj:=if(duopc,EXITPRICE,duopcj);
+		kongkcj:=if(kongkc,ENTERPRICE,kongkcj);
+		kongpcj:=if(kongpc,EXITPRICE,kongpcj);
+		col:=if(duokcj<duopcj, colorred, colorgreen);
+		DRAWLINE(duokc,duokcj,duopc,duopcj,0,col,4);
+		col:=if(kongkcj>kongpcj,colorred,colorgreen);
+		DRAWLINE(kongkc,kongkcj,kongpc,kongpcj,0,col,4);
+	END

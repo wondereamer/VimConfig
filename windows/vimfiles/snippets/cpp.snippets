@@ -1,0 +1,198 @@
+# Read File Into Vector
+snippet readfile
+	std::vector<char> v;
+	if (FILE *${2:fp} = fopen(${1:"filename"}, "r")) {
+		char buf[1024];
+		while (size_t len = fread(buf, 1, sizeof(buf), $2))
+			v.insert(v.end(), buf, buf + len);
+		fclose($2);
+	}${3}
+
+snippet getline
+	std::ifstream in(${1:fname});
+	std::string line;
+	while(std::getline(in, line)){
+
+	}
+# std::map
+snippet map
+	std::map<${1:key}, ${2:value}> map${3};
+# std::vector
+snippet vector
+	std::vector<${1:char}> v${2};
+# Namespace
+snippet ns
+	namespace ${1:`Filename('', 'my')`} {
+		${2}
+	} /* $1 */
+# Class
+snippet cl
+	class ${1:`Filename('$1_t', 'name')`} {
+	public:
+		$1 (${2:arguments});
+		virtual ~$1 ();
+	
+	private:
+		${3:/* data */}
+	};
+#description
+snippet cls
+	/**
+	* @brief ${1}
+	*/
+	class ${2:class_name} {
+
+	    /*---------------------------  lifecycle  ------------------------------------------------ */
+	    public:
+		$2(){ } 
+		virtual ~$2(){ } 
+
+	    /*------------------------------------------------------------------------------------ */
+	    public:
+
+	    protected:
+
+	    private:
+
+	    /*--------------------  accessor methods  -------------------------------------------- */
+	    public:
+
+
+	    /*-----------------------  attributes  ------------------------------------------------ */
+
+	    private:
+
+	}; 
+# template ..................................................................................................
+snippet tpl
+	template < typename ${1:T} >
+
+snippet classcopy
+	${1:class}( const $1 &other );   
+	$1& operator = ( const $1 &other ); 
+snippet <
+	bool operator < (const ${1:class} &other) const{
+		if(g < other.g)
+			return true;
+		else if(g > other.g)
+			return false;
+		else if(b < other.b)
+			return true;
+		else return false;
+	}
+snippet == 
+	bool operator == (const ${1:type}& other) const {
+	    return (${2:compare});
+	    }
+
+	bool operator!=(const $1& other) const {
+	    return !(*this == other});
+	    }
+snippet =
+	${1:class}& operator=(const $1&);
+snippet <<
+	std::ostream& operator<<(std::ostream& out, const ${1:class}& t);
+snippet binary
+	struct ${1:function_name} : public binary_function<${2:type1},
+							${3:type2},${4:result}>
+	{
+	    $4  operator()(const $2& ${5:arg1},
+			    const $3& ${6:arg2}) const;
+	};
+snippet unary
+	struct ${1:function_name} : public unary_function<${2:type1}, ${3:result}>
+	{
+	    $3  operator()(const $2& ${4:arg1}) const;
+	};
+
+snippet []
+	inline ${1:T*} operator[](int rowIndx) {
+		return ($1)${2:value};}
+	inline const $1 operator[](int rowIndx) const {
+		return ($1)$2;}
+
+snippet copy
+	std::copy(${1:source}.begin(), $1.end(), ${2:back_inserter(L)});
+
+#copy to output
+snippet copyo
+	std::copy(${1:source}.begin(), $1.end(),	
+			std::ostream_iterator<${2:T}>(std::cout, "\n"));
+#mark	
+snippet m
+	std::cout<<"*********************************"<<std::endl;	
+snippet cout
+	std::cout<<
+snippet endl
+	std::endl;
+snippet intmax
+	std::numeric_limits<int>::max
+#............................................................................	
+snippet try
+	try {
+	    ${1:code..}
+	} catch (...) {
+	    ${2:code..}
+	}
+	${3:}
+
+snippet usage
+		if (argc != 2) {
+			printf("Usage: %s <image>\n", argv[0]);
+			return 1;
+		}
+
+snippet assert
+		if(!${1:term}){
+			std::cerr<<"Error: ${2:You have to  invoke :#segment_points before invoking #viz_next_level}!"
+					 <<std::endl;
+			assert($1);
+snippet exe1
+		if(!${1:exe1}){
+			${2:code}
+			$1 = true;
+		}
+#qt............................................................................	
+snippet qtxml
+	QXmlStreamReader xmlReader(${1:text});
+	xmlReader.readNext();
+	while(!xmlReader.atEnd()){
+	    if (xmlReader.isStartElement()) {
+		if (xmlReader.name() == "annot" ) {
+		    Pdf_Document::Unique_Annot annot;
+		    xmlReader.readNext();
+		    annot.first = xmlReader.readElementText();
+		    xmlReader.readNext();
+		    annot.second  = xmlReader.readElementText();
+		    spec_annots.insert(annot);
+		}
+	    }
+	    xmlReader.readNext();
+
+snippet qd
+	qDebug()<<
+snippet connect
+	connect(${1:sender},SIGNAL(${2:fun}),${3:receiver},SLOT(${4:fun})); 
+snippet foreach
+	for(${1:value} : ${2:container}){
+
+	}
+# boost ----------------------------------------------------------------------------
+snippet boostgraph
+	typedef adjacency_list<vecS, vecS, undirectedS, no_property, property<edge_weight_t, int> > GraphContainer;
+	typedef AutoUniGraph<GraphContainer, PointF3D> MyGraph;
+#tip ---------------------------------------------------------------------------------
+snippet bit
+	#define HFP_FIT_PLANES    ((unsigned char)1)
+	#define HFP_FIT_SPHERES   ((unsigned char)2)
+	#define HFP_FIT_CYLINDERS ((unsigned char)4)
+	unsigned char wtf = 0;
+	// set marsk
+	wtf |= HFP_FIT_PLANES;
+	wtf |= HFP_FIT_SPHERES;
+	// check
+	return (wtf & HFP_FIT_PLANES);}
+snippet forb
+	for (auto iter = ${1:container}.begin(); iter != $1.end(); iter++) {
+		${2:/* code */}
+		}

@@ -1,0 +1,26 @@
+if(!preWord.isEmpty())
+    {
+	map<QString,unsigned>::iterator s = preWord_iR->second.transform.lower_bound(w1);
+	map<QString,unsigned>::iterator e = preWord_iR->second.transform.lower_bound(w2);
+	while(s != e)
+	{
+	    if(s->first.size() ==3)
+	    {
+		range_vec2.push_back(*s);
+		//                    qDebug()<<"#####";
+                qDebug()<<s->first;
+	    }
+	    s++;
+	}
+    }else{
+	MyMap::iterator s = inmapR.lower_bound(w1);
+	MyMap::iterator e = inmapR.lower_bound(w2);
+
+	while( s != e)
+	{
+	    //找到这些词汇
+	    //判断这些词汇是否能开头
+	    range_vec22R.push_back(*s);
+	    s++;
+	}
+    }

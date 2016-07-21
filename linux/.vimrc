@@ -37,10 +37,23 @@ set pastetoggle=<F8>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "dictionary
 "set complete-=k complete+=k
-autocmd FileType php set dictionary+=~/.mytags/dictionary/php.list
-autocmd FileType h,cpp set dictionary+=~/.mytags/dictionary/stl_index.list
-autocmd FileType py set dictionary+=~/.mytags/dictionary/complete-dict
+au BufNewFile,BufRead *py set dictionary+=~/.mytags/dictionary/pydiction.list
+au BufNewFile,BufRead *py set dictionary+=./complete-dict
 set dictionary+=~/.mytags/dictionary/en_word.list
+"" set dictionary+=./complete-dict
+"comment
+"""""""""""""""""
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+autocmd FileType c,cpp,cc,h  setl fdm=syntax | setl fen | setl foldcolumn=2 
+"" autocmd FileType c,cpp,cc,h  set tags+=~/.mytags/qttag
+autocmd FileType c,cpp,cc,h  set tags+=~/.mytags/cpp_tag
+autocmd FileType c,cpp,cc,h  set tags+=~/.mytags/cpp_tag2
+autocmd FileType c,cpp,cc,h  set tags+=~/.mytags/ctag
+autocmd FileType c,cpp,cc,h  set tags+=~/.mytags/systag
+autocmd FileType c,cpp,cc,h  set tags+=./tags
+autocmd FileType h,cpp set dictionary+=~/.mytags/dictionary/stl_index.list
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nohlsearch
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -61,17 +74,6 @@ let g:completekey = "<c-h>"   "hotkey
 ""abbreviate
 iabbrev #c connect(*,SIGNAL(*),*,SLOT(*)); 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"comment
-"""""""""""""""""
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-autocmd FileType c,cpp,cc,h  setl fdm=syntax | setl fen | setl foldcolumn=2 
-"" autocmd FileType c,cpp,cc,h  set tags+=~/.mytags/qttag
-autocmd FileType c,cpp,cc,h  set tags+=~/.mytags/cpp_tag
-autocmd FileType c,cpp,cc,h  set tags+=~/.mytags/cpp_tag2
-autocmd FileType c,cpp,cc,h  set tags+=~/.mytags/ctag
-autocmd FileType c,cpp,cc,h  set tags+=~/.mytags/systag
-autocmd FileType c,cpp,cc,h  set tags+=./tags
 "cpp tags with out 'using namespace std'
 "
 ""set tags+=~/.mytags/*
@@ -143,6 +145,19 @@ autocmd FileType c,cpp,h inoremap ,bi <esc>::call C_InsertTemplate("preprocessor
 autocmd FileType c,cpp,h inoremap <c-t> <tab><tab><tab>
 
 
+"------------------------Jedi--------------------" 
+let g:jedi#goto_command = "<leader>d"
+let g:jedi#goto_assignments_command = "<leader>g"
+let g:jedi#goto_definitions_command = ""
+let g:jedi#documentation_command = "K"
+let g:jedi#usages_command = "<leader>n"
+"let g:jedi#completions_command = "<C-8>"
+let g:jedi#completions_command = "<C-Alt>"
+let g:jedi#rename_command = "<leader>r"
+" .自动补全
+"" let g:jedi#popup_on_dot =  0
+"" let g:jedi#completions_enabled =  0
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Omin Setting
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -200,6 +215,7 @@ let g:winManagerWindowLayout = "BufExplorer,FileExplorer|TagList"
 let g:winManagerWidth = 40
 let g:defaultExplorer = 0
 let g:persistentBehaviour = 0
+let g:bufExplorerResize = 0
 nmap <C-W><C-T>  <Esc>:WMToggle<cr> 
 
 """""""""""""""""""""""""""""""""""""
@@ -345,15 +361,6 @@ map <silent> <leader>cf  :cs find f <C-R>=expand("<cfile>")<CR><CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""
 "php
 """"""""""""""""""""""""""""""""""""""""""""""""""
-"map <c-p> :call PHPsynCHK()<c-r>
-" Public Accessors
-autocmd FileType php map <F2> :s/\(\(\w\)\(\w\+\)\).*/public function get\u\2\3(){\r\treturn \$this->\1;\r}/<CR>
-au FileType php map K :call OpenPhpFunction('<C-r><C-w>')<CR>:q<cr>
-au FileType php map <F6> <esc>:!php -l %<CR>
-au FileType php map <F7> <esc>:!php %<CR>
-au FileType php :set errorformat=%m\ in\ %f\ on\ line\ %l
-au FileType php noremap L f$
-au FileType php noremap H F$
 ""au FileType tpl :set FileType=html  //useless
 au BufNewFile,BufRead *.swig set filetype=html
 au BufNewFile,BufRead *.html set filetype=html
@@ -462,4 +469,6 @@ endfunction
 "" this will conveniently prompt you to install them.
 "NeoBundleCheck
 ""End NeoBundle Scripts-------------------------
+
+let tlist_pyrex_settings = 'python;c:classe;m:memder;f:function'
 

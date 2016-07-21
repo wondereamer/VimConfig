@@ -1,0 +1,59 @@
+snippet if
+	If ${1:CON} Then
+		${2:CASE}
+	End If
+snippet ife
+	If ${1:CON} Then
+		${2:CASE}
+	Else
+		${3:CASE}
+	End If
+snippet select
+	Select Case ${1:VAL}
+		Case ${2:VAL}
+		${3:CASE}
+		Case ${4:VAL}
+		${5:CASE}
+		Case Else
+		${6:DEFAULT}
+	End Select
+snippet choose
+	Choose(${1:ID}, ${2:VAL},${3:VAL})
+snippet switch
+	Switch(${1:EXPR}, ${2:VAL},${3:EXPR}, ${4:VAL})
+snippet for
+	For ${1:counter} To ${2:end}
+		${3:case}
+	Next 
+snippet foreach
+	For Each ${1:element} In ${2:group}
+		${3:case}
+	Next 
+snippet with
+	With ${1:Obj}
+		${2:stament}
+	End With
+snippet while
+	Do While ${1:cond}
+		${2:case}
+	Loop
+snippet do
+	Do
+		${1:case}
+	Loop While ${2:cond}
+snippet dim
+	Dim ${1:var} As ${2:type}
+snippet cell
+	.Cells(${1:row},${2:col}).Value
+snippet array
+	Set ${1:var} = CreateObject("Stock.Array")
+snippet sub
+	Sub ${1:name}
+		${2:case}
+	End Sub
+snippet fun
+	Function ${1:name}
+		${2:case}
+	End Function
+snippet dict
+	Set ${1:name} = CreateObject("scripting.dictionary") 
