@@ -16,7 +16,6 @@ set incsearch
 set hidden
 
 set nobackup
-set textwidth=80
 set wrap
 set fo+=t
 set nocompatible
@@ -34,6 +33,12 @@ set autoread
 set autowrite
 " 复制，粘贴时的格式切换建" 
 set pastetoggle=<F8>
+
+" high light when length over 81
+set textwidth=100  "max length" 
+"" highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+"" match OverLength /\%100v.\+/
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "dictionary
 "set complete-=k complete+=k
@@ -44,7 +49,7 @@ set dictionary+=~/.mytags/dictionary/en_word.list
 "comment
 """""""""""""""""
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 autocmd FileType c,cpp,cc,h  setl fdm=syntax | setl fen | setl foldcolumn=2 
 "" autocmd FileType c,cpp,cc,h  set tags+=~/.mytags/qttag
 autocmd FileType c,cpp,cc,h  set tags+=~/.mytags/cpp_tag
@@ -116,7 +121,7 @@ map <silent> <leader>f <esc>:normal gg=G''<cr>
 map <silent> <leader>a <Esc>zM
 map <silent> <leader>x <Esc>zR
 map <silent> <leader>z  <Esc>zA
-map <cR>  <Esc>zA
+"map <cR>  <Esc>zA
 "read file
 map <silent> <leader>r  <Esc>:e!<cr>
 "quick fix
@@ -145,6 +150,8 @@ autocmd FileType c,cpp,h inoremap ,bi <esc>::call C_InsertTemplate("preprocessor
 autocmd FileType c,cpp,h inoremap <c-t> <tab><tab><tab>
 
 
+"------------------------pep8--------------------" 
+let g:flake8_show_in_file = 1
 "------------------------Jedi--------------------" 
 let g:jedi#goto_command = "<leader>d"
 let g:jedi#goto_assignments_command = "<leader>g"

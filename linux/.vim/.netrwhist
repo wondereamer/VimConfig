@@ -1,11 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =9
-let g:netrw_dirhist_1='/Users/wdj/AXMF/yodaqa/data/bing'
-let g:netrw_dirhist_2='/Users/wdj/Work/Quant/quantdigger'
-let g:netrw_dirhist_3='/Users/wdj/AXMF/AXMTests/workdj/asr_develop/webrtc/speaker-recognition/doc/Final-Report'
-let g:netrw_dirhist_4='/Users/wdj/AXMF/AXMTests/workdj/asr_develop/webrtc/speaker-recognition/log/stage/mixture_log'
-let g:netrw_dirhist_5='/Users/wdj/AXMF/AXMTests/workdj/asr_develop/webrtc/speaker-recognition/src/filters'
-let g:netrw_dirhist_6='/Users/wdj/work/VimConfig/linux/.vim/ftplugin/python/pyflakes'
-let g:netrw_dirhist_7='/Users/wdj/Work/Quant/quantdigger/quantdigger/event'
-let g:netrw_dirhist_8='/Users/wdj/AXMF/AXMTests/workdj/asr_develop/util'
-let g:netrw_dirhist_9='/Users/wdj/Work/NLP/VikiQASystem/vikiqa/nlp/ner'
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='/Users/wdj/Work/NLP/VikiQASystem/viki_qa/answer_services/intents'
+let g:netrw_dirhist_2='/Users/wdj/Work/NLP/VikiQASystem/viki_qa/answer_services/intents/flight_status'
+let g:netrw_dirhist_3='/Users/wdj/Work/NLP/VikiQASystem/data/knowledges/ns_bank'
+let g:netrw_dirhist_4='/Users/wdj/AXMF/AXMService/axmservice/service/axmaudio'
+let g:netrw_dirhist_5='/Users/wdj/Work/NLP/VikiAIML/apps/basic/rules'

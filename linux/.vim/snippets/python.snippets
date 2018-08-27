@@ -99,7 +99,11 @@ snippet r.r
 #description
 snippet with
 	with open(${1:fname}) as f:
-	    ${2:code}
+		for line in f:
+			line = line.rstrip('\n')
+			${2:code}
+snippet lines
+	lines =  [line.rstrip('\n') for line in open('${1:fname}')]
 #description
 snippet if
 	if ${1:condition}:
@@ -134,7 +138,7 @@ snippet gname
 	## @}
 #description
 snippet todo
-	## @TODO ${1:...}
+	# @TODO ${1:...}
 #....................................................................................
 snippet fore
 	for i,${1:needle} in enumerate(${2:haystack}):
@@ -234,6 +238,25 @@ snippet widget
 				 
 		def keyrelease(self, event):
 			pass
+snippet walk
+	import os
+	list_dirs = os.walk(${1:'./'})
+	for path, dirs, files in list_dirs:
+		for f in files:
+			if f.endswith(${1:postfix}):
+				source = os.path.join(path, f)
+snippet trace
+	import pdb
+	pdb.set_trace()
+snippet mkdir
+	if not os.path.isdir(self._voice_save_dir):
+		os.mkdir(self._voice_save_dir)
+snippet args
+	import argparse
+	parser = argparse.ArgumentParser()
+	parser.add_argument('-f', help='foo help')
+	args = parser.parse_args()
+	print args.f
 # DJango ----------------------------------------------------------------------
 snippet d.signal	
 	${1:signal_name }= Signal(providing_args=[${2:"user", "openid"}])
